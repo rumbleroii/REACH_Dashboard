@@ -13,6 +13,7 @@ import {
   ShellBarItem,
   List,
 } from "@ui5/webcomponents-react";
+
 import { spacing } from "@ui5/webcomponents-react-base";
 import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
 import lineChartIcon from "@ui5/webcomponents-icons/dist/line-chart.js";
