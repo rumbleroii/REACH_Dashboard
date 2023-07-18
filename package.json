@@ -9,8 +9,10 @@
     "@ui5/webcomponents-react": "^1.17.2",
     "@ui5/webcomponents-react-base": "^1.17.0",
     "@ui5/webcomponents-react-charts": "^1.17.1",
+    "@ui5/webcomponents-theme-base": "^1.0.0-rc.16",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },

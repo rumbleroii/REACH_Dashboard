@@ -62,37 +62,6 @@ export function MyApp() {
 
   return (
     <div>
-      <ShellBar
-        logo={<img alt="SAP Logo" src="https://sap.github.io/ui5-webcomponents/assets/images/sap-logo-svg.svg" />}
-        menuItems={
-          <>
-            <StandardListItem data-key="1">Menu Item 1</StandardListItem>
-            <StandardListItem data-key="2">Menu Item 2</StandardListItem>
-            <StandardListItem data-key="3">Menu Item 3</StandardListItem>
-          </>
-        }
-        notificationsCount="10"
-        onCoPilotClick={function ka() {}}
-        onLogoClick={function ka() {}}
-        onMenuItemClick={function ka() {}}
-        onNotificationsClick={function ka() {}}
-        onProfileClick={function ka() {}}
-        primaryTitle="Menu"
-        profile={<Avatar><img alt="" src="https://sap.github.io/ui5-webcomponents-react/assets/Person-eb847016.png" /></Avatar>}
-        searchField={<Input icon={<Icon interactive name="search" />} showClearIcon />}
-        secondaryTitle="REACH"
-        showCoPilot
-        showNotifications
-        style={{ background: "#0e639c" }} // Header ShellBar background color
-      >
-        <ShellBarItem
-          text="Mous"
-          textVisible
-          onClick={() => window.open("https://example.com", "_blank")}
-          className="shellbar-item-mous"
-        />
-      </ShellBar>
-
       <div style={{ display: "flex", alignItems: "flex-start", marginTop: "16px" }}>
   {/* Research buttons */}
   <div style={{ display: "flex", flexDirection: "column",marginRight: "20px",marginTop:"150px",marginLeft:" 8px" }}>
