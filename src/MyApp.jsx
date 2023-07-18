@@ -11,6 +11,7 @@ import {
   StandardListItem,
   Input,
   ShellBarItem,
+  List,
 } from "@ui5/webcomponents-react";
 import { spacing } from "@ui5/webcomponents-react-base";
 import { BarChart, LineChart } from "@ui5/webcomponents-react-charts";
@@ -91,55 +92,74 @@ export function MyApp() {
         />
       </ShellBar>
 
-      <div style={{ display: "flex", justifyContent: "center", marginTop: "16px" }}>
-        <Button onClick={function ka() {}}>Research</Button>
-        <div style={{ width: "16px" }} /> {/* Gap between buttons */}
-        <Button onClick={function ka() {}}>Experience</Button>
-        <div style={{ width: "16px" }} /> {/* Gap between buttons */}
-        <Button onClick={function ka() {}}>Learning</Button>
-      </div>
+      <div style={{ display: "flex", alignItems: "flex-start", marginTop: "16px" }}>
+  {/* Research buttons */}
+  <div style={{ display: "flex", flexDirection: "column",marginRight: "20px",marginTop:"150px",marginLeft:" 8px" }}>
+    <Button onClick={function ka() {}}>Research</Button>
+    <div style={{ height: "16px" }} /> {/* Gap between buttons */}
+    <Button onClick={function ka() {}}>Experience</Button>
+    <div style={{ height: "16px" }} /> {/* Gap between buttons */}
+    <Button onClick={function ka() {}}>Learning</Button>
+  </div>
 
-      <div style={{ display: "flex", marginTop: "16px" }}>
+      <div style={{ display: "flex", alignItems: "flex-start", height: "100%", marginTop: "10px " }}>
         <Calendar
           onSelectedDatesChange={function ka() {}}
           primaryCalendarType="Gregorian"
         />
+        {/*1st card*/}
         <Card
-          header={
-            <CardHeader
-              titleText="Card"
-              interactive
-              onClick={handleHeaderClick}
-              avatar={
-                <Icon
-                  name={
-                    toggleCharts === "lineChart"
-                      ? lineChartIcon
-                      : barChartIcon
-                  }
-                />
-              }
-            />
-          }
-          style={{ width: "300px", marginLeft: "16px" }}
-        >
-          <Text style={spacing.sapUiContentPadding}>
-            This is the content area of the Card
-          </Text>
-          {toggleCharts === "lineChart" ? (
-            <LineChart
-              dimensions={[{ accessor: "month" }]}
-              measures={[{ accessor: "data", label: "Stock Price" }]}
-              dataset={dataset}
-            />
-          ) : (
-            <BarChart
-              dimensions={[{ accessor: "month" }]}
-              measures={[{ accessor: "data", label: "Stock Price" }]}
-              dataset={dataset}
-            />
-          )}
-        </Card>
+  header={<CardHeader avatar={<Icon name="person-placeholder" />} status="3 of 5" subtitleText="Direct Reports" titleText="TeamSpace"/>}
+  style={{
+    width: '300px'
+  }}
+>
+  <List>
+    <StandardListItem description="Software Architect">
+      Richard Wilson
+    </StandardListItem>
+    <StandardListItem description="Visual Designer">
+      Elena Petrova
+    </StandardListItem>
+    <StandardListItem description="Quality Specialist">
+      John Miller
+    </StandardListItem>
+  </List>
+</Card>
+        <Card
+    header={
+      <CardHeader
+        titleText="Card"
+        interactive
+        onClick={handleHeaderClick}
+        avatar={
+          <Icon
+            name={toggleCharts === "lineChart" ? lineChartIcon : barChartIcon}
+          />
+        }
+      />
+    }
+    style={{ width: "300px", marginLeft: "16px" }}
+  >
+    {/* Card content */}
+    <Text style={spacing.sapUiContentPadding}>
+      This is the content area of the Card
+    </Text>
+    {toggleCharts === "lineChart" ? (
+      <LineChart
+        dimensions={[{ accessor: "month" }]}
+        measures={[{ accessor: "data", label: "Stock Price" }]}
+        dataset={dataset}
+      />
+    ) : (
+      <BarChart
+        dimensions={[{ accessor: "month" }]}
+        measures={[{ accessor: "data", label: "Stock Price" }]}
+        dataset={dataset}
+      />
+    )}
+      </Card>
+      </div>
       </div>
 
       <div
@@ -172,3 +192,4 @@ export function MyApp() {
     </div>
   );
 }
+
