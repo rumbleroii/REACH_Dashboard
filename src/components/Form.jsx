@@ -1,10 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Link, Text, CheckBox, Select, Option } from '@ui5/webcomponents-react';
-import { FormItem } from '@ui5/webcomponents-react';
-import { Label } from '@ui5/webcomponents-react';
-import { Input } from '@ui5/webcomponents-react';
-import { TextArea } from '@ui5/webcomponents-react';
-
+import { Form, FormGroup, Link, Text, CheckBox, Select, Option, FormItem, Label, Input, TextArea } from '@ui5/webcomponents-react';
 
 import './Form.css'; // Import your custom CSS if needed
 
