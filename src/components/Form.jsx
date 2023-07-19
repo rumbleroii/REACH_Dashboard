@@ -25,6 +25,7 @@ const FormPage = () => {
   };
 
   return (
+    <div style={{ margin: "30px"}}>
     <Form
       backgroundDesign="Transparent"
       columnsL={2} // Set the number of columns for the form groups
@@ -35,12 +36,10 @@ const FormPage = () => {
       labelSpanM={2}
       labelSpanS={12}
       labelSpanXL={4}
-      titleText={<h1>Add Event</h1>}
+      titleText={<h1><b>Add Event</b></h1>}
     >
       <FormGroup titleText="Event Data">
-       
         <FormItem label="Event Name">
-          
           <Input placeholder="Enter event name" />
         </FormItem>
         <FormItem label="Online">
@@ -89,6 +88,7 @@ const FormPage = () => {
           <TextArea placeholder="Briefly tell us about your Event" rows={5} />
         </FormItem>
    </FormGroup>
+   
   <FormGroup titleText="Point Of Responsbility Data">
     <FormItem label="POR Name">
       <Input 
@@ -101,7 +101,9 @@ const FormPage = () => {
     
     
         <FormItem label="Insititutions">
+          
           <MultiComboBox
+          placeholder='Select the Univeristies you want'
   onChange={function ka(){}}
   onInput={function ka(){}}
   onOpenChange={function ka(){}}
@@ -114,14 +116,15 @@ const FormPage = () => {
   <MultiComboBoxItem text="YYY" />
 </MultiComboBox>
         </FormItem>
-</FormGroup>
-  <FormItem>
-    <div className="button-container">
-        <Button onClick={handleSubmit}>Add Event</Button> {/* Add a submit button */}
-        </div>
-        </FormItem>
+</FormGroup> 
         
     </Form>
+    
+    <div className="button-container">
+        <Button onClick={handleSubmit}>Submit</Button> {/* Add a submit button */}
+        </div>
+        
+    </div>
   );
 };
 

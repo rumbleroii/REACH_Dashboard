@@ -23,13 +23,22 @@
   .form-item {
     width: calc(50% - 8px);
   }
-.button-container {
+/* .button-container {
   display: flex;
   justify-content: center;
-  margin-left: 450px;
+  text-align: center;
+  align-items: center;
   margin-bottom: 40px;
+} */
+.button-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 20px;
 }
 /* .form-title {
   margin-right: 70px;
 } */
+
 
