@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Link, Text, CheckBox, Select, Option, FormItem, Label, Input, TextArea, DatePicker,TimePicker } from '@ui5/webcomponents-react';
+
+import { Form, FormGroup, Link, Text, CheckBox,Select,Option, FormItem,MultiComboBox,MultiComboBoxItem, Label, Input, TextArea, DatePicker,TimePicker,MessageBox,Button } from '@ui5/webcomponents-react';
 
 import './Form.css'; // Import your custom CSS if needed
 
 const FormPage = () => {
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
     // Handle form submission here
+    
+    // Show a popup with the event created message
+    MessageBox.success('Event created', {
+      title: 'Success',
+      onClose: () => {
+        // Perform any additional actions after the popup is closed
+      },
+    });
   };
+
 
   const [isOnline, setIsOnline] = useState(false);
 
@@ -17,6 +26,7 @@ const FormPage = () => {
 
   return (
     <Form
+      backgroundDesign="Transparent"
       columnsL={1}
       columnsM={1}
       columnsS={1}
@@ -25,7 +35,7 @@ const FormPage = () => {
       labelSpanM={2}
       labelSpanS={12}
       labelSpanXL={4}
-      titleText="Create Event"
+      titleText={<h1>Add Event</h1>}
     >
       <FormGroup titleText="Event Data">
         <FormItem label="Event Name">
@@ -46,13 +56,19 @@ const FormPage = () => {
           </FormItem>
         )}
 
-        <FormItem label="Event Type">
-          <Select>
-            <Option>Research</Option>
-            <Option>Experience</Option>
-            <Option>Learning</Option>
-          </Select>
-        </FormItem>
+    <FormItem label="Event Type">
+      <Select>
+        <Option>
+          Research
+        </Option>
+        <Option>
+          Experience
+        </Option>
+        <Option>
+          Learning
+        </Option>
+      </Select>
+    </FormItem>
          <FormItem label="Start Date">
           <DatePicker placeholder="Select start date" />
         </FormItem>
@@ -71,12 +87,14 @@ const FormPage = () => {
           <TextArea placeholder="Briefly tell us about your Event" rows={5} />
         </FormItem>
    </FormGroup>
-  <FormGroup titleText="Organiser Data">
-    <FormItem label="Organiser Name">
-      <Input />
+  <FormGroup titleText="Point Of Responsbility Data">
+    <FormItem label="POR Name">
+      <Input 
+      placeholder='Enter POR name'/>
     </FormItem>
-    <FormItem label="Organiser E-mail ID">
-      <Input />
+    <FormItem label="POR E-mail ID">
+      <Input 
+      placeholder='Enter email Id'/>
     </FormItem>
     {/*<FormItem label="Company City">
       <Input />
@@ -99,13 +117,28 @@ const FormPage = () => {
     <FormItem label="Email">
       <Input type="Email" />
     </FormItem>
-    <FormItem label="Company Email">
-      <Input type="Email" />
-    </FormItem>
-    <FormItem label="I want to receive the newsletter">
-      <CheckBox />
-</FormItem>
+        <FormItem label="Insititutions">
+          <MultiComboBox
+  onChange={function ka(){}}
+  onInput={function ka(){}}
+  onOpenChange={function ka(){}}
+  onSelectionChange={function ka(){}}
+>
+  <MultiComboBoxItem text="VJTI" />
+  <MultiComboBoxItem text="Cummins" />
+  <MultiComboBoxItem text="Amritha" />
+  <MultiComboBoxItem text="XXX" />
+  <MultiComboBoxItem text="YYY" />
+</MultiComboBox>
+        </FormItem>
+        
+        <FormItem>
+          
+        </FormItem>
   </FormGroup>
+  <FormItem>
+        <Button onClick={handleSubmit}>Add Event</Button> {/* Add a submit button */}
+        </FormItem>
     </Form>
   );
 };
