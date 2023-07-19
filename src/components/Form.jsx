@@ -27,10 +27,10 @@ const FormPage = () => {
   return (
     <Form
       backgroundDesign="Transparent"
-      columnsL={1}
+      columnsL={2} // Set the number of columns for the form groups
       columnsM={1}
       columnsS={1}
-      columnsXL={2}
+      columnsXL={3}
       labelSpanL={4}
       labelSpanM={2}
       labelSpanS={12}
@@ -96,27 +96,8 @@ const FormPage = () => {
       <Input 
       placeholder='Enter email Id'/>
     </FormItem>
-    {/*<FormItem label="Company City">
-      <Input />
-    </FormItem>
-    <FormItem label="Company Country">
-      <Input />
-    </FormItem>
-    <FormItem label="Number of Employees">
-      <Input
-        disabled
-        type="Number"
-        value="5000"
-      />
-    </FormItem>
-    <FormItem label="Member of Partner Network">
-      <CheckBox checked />
-</FormItem>*/}
-</FormGroup>
-  <FormGroup titleText="Marketing Data">
-    <FormItem label="Email">
-      <Input type="Email" />
-    </FormItem>
+    
+    
         <FormItem label="Insititutions">
           <MultiComboBox
   onChange={function ka(){}}
@@ -131,14 +112,10 @@ const FormPage = () => {
   <MultiComboBoxItem text="YYY" />
 </MultiComboBox>
         </FormItem>
-        
-        <FormItem>
-          
-        </FormItem>
-  </FormGroup>
-  <FormItem>
+</FormGroup>
+  <div className="button-container">
         <Button onClick={handleSubmit}>Add Event</Button> {/* Add a submit button */}
-        </FormItem>
+      </div>
     </Form>
   );
 };

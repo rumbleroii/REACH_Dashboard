@@ -22,4 +22,10 @@
   .form-item {
     width: calc(50% - 8px);
   }
-  
+ .button-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: -20px;
+}
+ 
