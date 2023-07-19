@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Form, FormGroup, Link, Text, CheckBox,Select,Option, FormItem,MultiComboBox,MultiComboBoxItem, Label, Input, TextArea, DatePicker,TimePicker,MessageBox,Button } from '@ui5/webcomponents-react';
+import { Form, FormGroup, CheckBox,Select,Option, FormItem,MultiComboBox,MultiComboBoxItem, Label, Input, TextArea, DatePicker,TimePicker,MessageBox,Button } from '@ui5/webcomponents-react';
 
 import './Form.css'; // Import your custom CSS if needed
 
@@ -38,7 +38,9 @@ const FormPage = () => {
       titleText={<h1>Add Event</h1>}
     >
       <FormGroup titleText="Event Data">
+       
         <FormItem label="Event Name">
+          
           <Input placeholder="Enter event name" />
         </FormItem>
         <FormItem label="Online">
@@ -113,9 +115,12 @@ const FormPage = () => {
 </MultiComboBox>
         </FormItem>
 </FormGroup>
-  <div className="button-container">
+  <FormItem>
+    <div className="button-container">
         <Button onClick={handleSubmit}>Add Event</Button> {/* Add a submit button */}
-      </div>
+        </div>
+        </FormItem>
+        
     </Form>
   );
 };
