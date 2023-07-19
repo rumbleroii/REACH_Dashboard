@@ -1,0 +1,8 @@
+/* App.css */
+
+/* Target the SAPUI5 Calendar */
+.ui5-cal-root {
+    /* Adjust the font size as per your requirement */
+    font-size: 16px;
+  }
+  
