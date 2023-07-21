@@ -1,23 +1,18 @@
 import React, { useState, useEffect } from "react";
-
 import {
   Calendar,
   Card,
   CardHeader,
-  List,
-  StandardListItem,
   Icon,
   Button,
-  BorderDesign,
 } from "@ui5/webcomponents-react";
-
 import "./Home.css";
 
 const Home = () => {
   const [selectedDate, setSelectedDate] = useState(null);
+  const [emphasizedButton, setEmphasizedButton] = useState(null);
 
   const handleDateSelect = (event) => {
-    console.log(event.detail);
     setSelectedDate(event.detail.values[0]);
   };
 
@@ -29,29 +24,49 @@ const Home = () => {
   const buttonStyle = {
     width: "170px", // Set the desired width of the buttons
     height: "46px",
-    borderRadius:"10px"
+    borderRadius: "10px",
+    border: "2px solid",
+    fontSize: "15px",
+    fontWeight: emphasizedButton === "Research" ? "bold" : "normal",
   };
 
-  const customTileStyle = {
-    width: "auto", // Set the desired width of the tiles
-    height: "auto", // Set the desired height of the tiles
-    // Add any other custom styles as needed
+  const handleButtonClick = (buttonName) => {
+    setEmphasizedButton((prevButton) =>
+      prevButton === buttonName ? null : buttonName
+    );
   };
-  
-
-  // Date Object
 
   return (
     <div>
       <div className="button-container">
         <div className="buttons">
-          <Button style={buttonStyle} onClick={function ka() {}}>Research</Button>
-          <div style={{ height: "16px"}} /> {/* Gap between buttons */}
-          <Button style={buttonStyle} onClick={function ka() {}}>Experience</Button>
+          <Button
+            style={buttonStyle}
+            onClick={() => handleButtonClick("Research")}
+            design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
+          >
+            Research
+          </Button>
           <div style={{ height: "16px" }} /> {/* Gap between buttons */}
-          <Button style={buttonStyle} onClick={function ka() {}}>Learning</Button>
+          <Button
+            style={buttonStyle}
+            onClick={() => handleButtonClick("Experience")}
+            design={
+              emphasizedButton === "Experience" ? "Emphasized" : "Default"
+            }
+          >
+            Experience
+          </Button>
+          <div style={{ height: "16px" }} /> {/* Gap between buttons */}
+          <Button
+            style={buttonStyle}
+            onClick={() => handleButtonClick("Learning")}
+            design={emphasizedButton === "Learning" ? "Emphasized" : "Default"}
+          >
+            Learning
+          </Button>
         </div>
-      </div >
+      </div>
       <div
         style={{
           display: "flex",
@@ -64,7 +79,6 @@ const Home = () => {
       >
         <div>
           <Calendar
-            style={customTileStyle}
             onSelectedDatesChange={handleDateSelect}
             primaryCalendarType="Gregorian"
           />
