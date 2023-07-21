@@ -33,7 +33,9 @@ const Home = () => {
     fontSize: "15px",
     marginLeft:"50px",
     marginRight:"50px",
+    border: "1.5px solid", 
     fontWeight: emphasizedButton === "Research" ? "bold" : "normal",
+    
   };
 
   const handleButtonClick = (buttonName) => {
@@ -44,57 +46,67 @@ const Home = () => {
 
   return (
     <>
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{padding:"4vh"}}>
+     <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{padding:"4vh"}}>
           <Button
             style={buttonStyle}
             onClick={() => handleButtonClick("Research")}
             design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
           >
-            Research
+            {<b>Research</b>}
           </Button>
           <Button
             style={buttonStyle}
             onClick={() => handleButtonClick("Learning")}
             design={emphasizedButton === "Learning" ? "Emphasized" : "Default"}
           >
-            Learning
+            {<b>Learning</b>}
           </Button>
           <Button
             style={buttonStyle}
             onClick={() => handleButtonClick("Experience")}
             design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
           >
-            Experience
+            {<b>Experience</b>}
           </Button>
       </FlexBox>
       
-      <FlexBox alignItems={FlexBoxAlignItems.Center}>
+     <FlexBox alignItems={FlexBoxAlignItems.Center}>
+      <div style={{ position: 'relative' }}>
+        <h3 style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)' }}>CII Index</h3>
+        
+        <RadialChart
+          value={50}
+          displayValue="50%"
+          style={{
+            width: '270px',
+            height: '270px',
+            marginRight:'50px'
+          }}
+          chartConfig={{
+            innerRadius: '50%',
+            outerRadius: '70%',
+            margin: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
+            }
+          }}
+        />
+      </div>
           <FlexBox alignItems={FlexBoxAlignItems.Center}>
-            <Text>CII Index</Text>
-              <RadialChart value={50} displayValue="50%" style={{
-                width: '270px',
-                height: '270px'
-              }} chartConfig={{
-                innerRadius: '70%',
-                margin: {
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: 0
-                }
-              }} />
-          </FlexBox>
-          <FlexBox alignItems={FlexBoxAlignItems.Center}>
-            <Calendar
-              onSelectedDatesChange={handleDateSelect}
-              primaryCalendarType="Gregorian"
-            />
+            <div style={{ position: 'relative', top: '-6px' }}> {/* Adjust the 'top' value to move the calendar higher */}
+        <Calendar
+          onSelectedDatesChange={handleDateSelect}
+          primaryCalendarType="Gregorian"
+        />
+      </div>
           </FlexBox>
 
           <FlexBox alignItems={FlexBoxAlignItems.Center}>
             <Card
               header={<CardHeader subtitleText="Events" titleText={selectedDate} />}
-              style={{ width: '150px'}}
+              style={{ width: '350px',marginLeft:'40px'}}
             >
             </Card>
           </FlexBox>
@@ -104,4 +116,3 @@ const Home = () => {
 };
 
 export default Home;
-

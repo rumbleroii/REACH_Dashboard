@@ -107,6 +107,7 @@ export function MyApp() {
             name={toggleCharts === "lineChart" ? lineChartIcon : barChartIcon}
           />
         }
+        
       />
     }
     style={{ width: "300px", marginLeft: "16px" }}
