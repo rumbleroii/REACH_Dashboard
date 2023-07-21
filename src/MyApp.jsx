@@ -85,7 +85,7 @@ export function MyApp() {
   }}
 >
   <List>
-    <StandardListItem description="Software Architect">
+    <StandardListItem description="Software Architec">
       Richard Wilson
     </StandardListItem>
     <StandardListItem description="Visual Designer">
