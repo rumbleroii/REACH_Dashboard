@@ -68,7 +68,7 @@ const Home = () => {
           </Button>
       </FlexBox>
       
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.SpaceAround}>
+      <FlexBox alignItems={FlexBoxAlignItems.Center}>
           <FlexBox alignItems={FlexBoxAlignItems.Center}>
             <Text>CII Index</Text>
               <RadialChart value={50} displayValue="50%" style={{
