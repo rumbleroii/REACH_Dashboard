@@ -5,7 +5,13 @@ import {
   CardHeader,
   Icon,
   Button,
+  FlexBox,
+  FlexBoxAlignItems,
+  FlexBoxJustifyContent,
+  Text
 } from "@ui5/webcomponents-react";
+
+import { RadialChart } from "@ui5/webcomponents-react-charts";
 import "./Home.css";
 
 const Home = () => {
@@ -22,11 +28,11 @@ const Home = () => {
   }, []);
 
   const buttonStyle = {
-    width: "170px", // Set the desired width of the buttons
+    width: "170px",
     height: "46px",
-    borderRadius: "10px",
-    border: "2px solid",
     fontSize: "15px",
+    marginLeft:"50px",
+    marginRight:"50px",
     fontWeight: emphasizedButton === "Research" ? "bold" : "normal",
   };
 
@@ -37,9 +43,8 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <div className="button-container">
-        <div className="buttons">
+    <>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{padding:"4vh"}}>
           <Button
             style={buttonStyle}
             onClick={() => handleButtonClick("Research")}
@@ -47,17 +52,6 @@ const Home = () => {
           >
             Research
           </Button>
-          <div style={{ height: "16px" }} /> {/* Gap between buttons */}
-          <Button
-            style={buttonStyle}
-            onClick={() => handleButtonClick("Experience")}
-            design={
-              emphasizedButton === "Experience" ? "Emphasized" : "Default"
-            }
-          >
-            Experience
-          </Button>
-          <div style={{ height: "16px" }} /> {/* Gap between buttons */}
           <Button
             style={buttonStyle}
             onClick={() => handleButtonClick("Learning")}
@@ -65,44 +59,49 @@ const Home = () => {
           >
             Learning
           </Button>
-        </div>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "90vh",
-          width: "100%",
-        }}
-      >
-        <div>
-          <Calendar
-            onSelectedDatesChange={handleDateSelect}
-            primaryCalendarType="Gregorian"
-          />
-        </div>
-
-        <Card
-          header={
-            <CardHeader
-              avatar={<Icon name="person-placeholder" />}
-              subtitleText="Events"
-              titleText={selectedDate}
+          <Button
+            style={buttonStyle}
+            onClick={() => handleButtonClick("Experience")}
+            design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
+          >
+            Experience
+          </Button>
+      </FlexBox>
+      
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.SpaceAround}>
+          <FlexBox alignItems={FlexBoxAlignItems.Center}>
+            <Text>CII Index</Text>
+              <RadialChart value={50} displayValue="50%" style={{
+                width: '270px',
+                height: '270px'
+              }} chartConfig={{
+                innerRadius: '70%',
+                margin: {
+                  top: 0,
+                  right: 0,
+                  bottom: 0,
+                  left: 0
+                }
+              }} />
+          </FlexBox>
+          <FlexBox alignItems={FlexBoxAlignItems.Center}>
+            <Calendar
+              onSelectedDatesChange={handleDateSelect}
+              primaryCalendarType="Gregorian"
             />
-          }
-          style={{ width: "400px", marginLeft: "100px" }}
-        >
-          {/* <List>
-            <StandardListItem description="Software Architect"> Richard Wilson</StandardListItem>
-            <StandardListItem description="Visual Designer"> Elena Petrova </StandardListItem>
-            <StandardListItem description="Quality Specialist"> John Miller </StandardListItem>
-          </List> */}
-        </Card>
-      </div>
-    </div>
+          </FlexBox>
+
+          <FlexBox alignItems={FlexBoxAlignItems.Center}>
+            <Card
+              header={<CardHeader subtitleText="Events" titleText={selectedDate} />}
+              style={{ width: '150px'}}
+            >
+            </Card>
+          </FlexBox>
+        </FlexBox>
+    </>
   );
 };
 
 export default Home;
+
