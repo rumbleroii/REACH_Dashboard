@@ -14,13 +14,16 @@ const Analystics = (tableData) => {
         accessor: 'deadline'
       },
       {
+        Header: 'Pillar',
+        accessor: 'pillar'
+      },
+      {
         Header: 'Progress',
         accessor: 'progress',
         Cell: (instance) => { 
             return <ProgressIndicator value={instance.cell.value}/> 
         }
-      },
-      
+      }
     ]}
     data={tableData.data}
     filterable
