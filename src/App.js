@@ -18,12 +18,12 @@ function App() {
   return (
     <>
     <Navigation />
-    <Routes>
-      <Route path="/create-event" element={<Form/>}></Route>
-      <Route path="/myapp" element={<MyApp />} />
-      <Route path="/" element={<Home />} />
-    </Routes>
-    <Footer />
+      <Routes>
+        <Route path="/create-event" element={<Form/>}></Route>
+        <Route path="/myapp" element={<MyApp />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
+    {/* <Footer /> */}
     </>
   );
 }

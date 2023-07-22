@@ -8,7 +8,12 @@ import {
   FlexBox,
   FlexBoxAlignItems,
   FlexBoxJustifyContent,
-  Text
+  List,
+  StandardListItem,
+  ProgressIndicator,
+  AnalyticalTable,
+  Select,
+  Option
 } from "@ui5/webcomponents-react";
 
 import { RadialChart } from "@ui5/webcomponents-react-charts";
@@ -46,73 +51,166 @@ const Home = () => {
 
   return (
     <>
-     <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{padding:"4vh"}}>
-          <Button
-            style={buttonStyle}
-            onClick={() => handleButtonClick("Research")}
-            design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
-          >
-            {<b>Research</b>}
-          </Button>
-          <Button
-            style={buttonStyle}
-            onClick={() => handleButtonClick("Learning")}
-            design={emphasizedButton === "Learning" ? "Emphasized" : "Default"}
-          >
-            {<b>Learning</b>}
-          </Button>
-          <Button
-            style={buttonStyle}
-            onClick={() => handleButtonClick("Experience")}
-            design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
-          >
-            {<b>Experience</b>}
-          </Button>
-      </FlexBox>
-      
-     <FlexBox alignItems={FlexBoxAlignItems.Center}>
-      <div style={{ position: 'relative' }}>
-        <h3 style={{ position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)' }}>CII Index</h3>
-        
-        <RadialChart
-          value={50}
-          displayValue="50%"
-          style={{
-            width: '270px',
-            height: '270px',
-            marginRight:'50px'
-          }}
-          chartConfig={{
-            innerRadius: '50%',
-            outerRadius: '70%',
-            margin: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0
-            }
-          }}
-        />
-      </div>
-          <FlexBox alignItems={FlexBoxAlignItems.Center}>
-            <div style={{ position: 'relative', top: '-6px' }}> {/* Adjust the 'top' value to move the calendar higher */}
-        <Calendar
-          onSelectedDatesChange={handleDateSelect}
-          primaryCalendarType="Gregorian"
-        />
-      </div>
-          </FlexBox>
-
-          <FlexBox alignItems={FlexBoxAlignItems.Center}>
-            <Card
-              header={<CardHeader subtitleText="Events" titleText={selectedDate} />}
-              style={{ width: '350px',marginLeft:'40px'}}
+        <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{padding:"4vh"}}>
+            <Button
+              style={buttonStyle}
+              onClick={() => handleButtonClick("Research")}
+              design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
             >
-            </Card>
-          </FlexBox>
+              {<b>Research</b>}
+            </Button>
+            <Button
+              style={buttonStyle}
+              onClick={() => handleButtonClick("Learning")}
+              design={emphasizedButton === "Learning" ? "Emphasized" : "Default"}
+            >
+              {<b>Learning</b>}
+            </Button>
+            <Button
+              style={buttonStyle}
+              onClick={() => handleButtonClick("Experience")}
+              design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
+            >
+              {<b>Experience</b>}
+            </Button>
+        </FlexBox>
+        
+        <FlexBox alignItems={FlexBoxAlignItems.Center} style={{ height: "70vh" }}>
+            <FlexBox alignItems={FlexBoxAlignItems.Center}>
+              <Calendar
+                onSelectedDatesChange={handleDateSelect}
+                primaryCalendarType="Gregorian"
+              />
+            </FlexBox>
+
+            <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "100"}}>
+              <Card
+                header={<CardHeader status="2 of 5" subtitleText="Events for the day" titleText={selectedDate}/>}
+                style={{
+                  width: '100%'
+                }}
+              >
+                <AnalyticalTable
+                  columns={[
+                    {
+                      Header: 'Name',
+                      accessor: 'name',
+                      headerTooltip: 'Full Name'
+                    },
+                    {
+                      Header: 'Age',
+                      accessor: 'age',
+                      className: 'superCustomClass',
+                      disableFilters: false,
+                      disableGroupBy: true,
+                      disableSortBy: false,
+                      hAlign: 'End'
+                    },
+                    {
+                      Header: 'Friend Name',
+                      accessor: 'friend.name'
+                    },
+                    {
+                      accessor: 'friend.age',
+                      hAlign: 'End',
+                      Header: () => <span>Friend Age</span>,
+                      filter: (rows, accessor, filterValue) => {
+                        if (filterValue === 'all') {
+                          return rows;
+                        }
+                        if (filterValue === 'true') {
+                          return rows.filter((row) => row.values[accessor] >= 21);
+                        }
+                        return rows.filter((row) => row.values[accessor] < 21);
+                      },
+                      Filter: ({ column, popoverRef }) => {
+                        const handleChange = (event) => {
+                          // set filter
+                          column.setFilter(event.detail.selectedOption.getAttribute('value'));
+                          // close popover
+                          popoverRef.current.close();
+                        };
+                        return (
+                          <Select
+                            onChange={handleChange}
+                            style={{ width: '100%' }}
+                            value={column.filterValue ? column.filterValue : 'all'}
+                          >
+                            <Option value="all">Show All</Option>
+                            <Option value="true">Can Drink</Option>
+                            <Option value="false">Can't Drink</Option>
+                          </Select>
+                        );
+                      }
+                    }
+                  ]}
+                  data={[
+                    {
+                      age: 80,
+                      friend: {
+                        age: 68,
+                        name: 'Carver Vance'
+                      },
+                      name: 'Allen Best',
+                      status: 'Success'
+                    },
+                    {
+                      age: 31,
+                      friend: {
+                        age: 70,
+                        name: 'Strickland Gallegos'
+                      },
+                      name: 'Combs Fleming',
+                      status: 'None'
+                    },
+                    {
+                      age: 31,
+                      friend: {
+                        age: 70,
+                        name: 'Strickland Gallegos'
+                      },
+                      name: 'Combs Fleming',
+                      status: 'None'
+                    },
+                    {
+                      age: 31,
+                      friend: {
+                        age: 70,
+                        name: 'Strickland Gallegos'
+                      },
+                      name: 'Combs Fleming',
+                      status: 'None'
+                    },
+                    {
+                      age: 31,
+                      friend: {
+                        age: 70,
+                        name: 'Strickland Gallegos'
+                      },
+                      name: 'Combs Fleming',
+                      status: 'None'
+                    },
+                    {
+                      age: 31,
+                      friend: {
+                        age: 70,
+                        name: 'Strickland Gallegos'
+                      },
+                      name: 'Combs Fleming',
+                      status: 'None'
+                    }
+                    // shortened for readability
+                  ]}
+                  filterable
+                  rowHeight={44}
+                  withRowHighlight
+                  />
+              </Card>
+            </FlexBox>
         </FlexBox>
     </>
   );
 };
 
 export default Home;
+

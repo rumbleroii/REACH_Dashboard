@@ -1,27 +1,20 @@
-/* App.css */
-
-/* Target the SAPUI5 Calendar */
-.ui5-cal-root {
-    /* Adjust the font size as per your requirement */
-    font-size: 16px;
-  }
-  .button-container {
-    display: flex;
-    align-items: center; /* Center the buttons vertically */
-    justify-content: center; /* Center the buttons horizontally */
-    margin-top: auto; /* Push the buttons to the end (bottom) of the container */
-    margin-bottom: -70px;
-  }
+.button-container {
+  display: flex;
+  align-items: center; /* Center the buttons vertically */
+  justify-content: center; /* Center the buttons horizontally */
+  margin-top: auto; /* Push the buttons to the end (bottom) of the container */
+  margin-bottom: -70px;
+}
   
-  .buttons {
-    margin-top: 30px;
-    display: flex;
-    gap: 40px; /* Adjust the gap between buttons as needed */
-  }
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 40px; /* Adjust the gap between buttons as needed */
+}
   
-  .buttons > button {
-    flex: 1;
-    max-width: 200px; /* Adjust the button width as needed */
-  }
+.buttons > button {
+  flex: 1;
+  max-width: 200px; /* Adjust the button width as needed */
+}
 
   

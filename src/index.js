@@ -5,6 +5,8 @@ import App from './App';
 import { ThemeProvider } from '@ui5/webcomponents-react';
 import { BrowserRouter } from "react-router-dom";
 
+import "./index.css"
+
 const container = document.getElementById('root');
 const root = createRoot(container);
 
