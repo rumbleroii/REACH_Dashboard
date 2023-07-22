@@ -79,8 +79,8 @@ const Home = () => {
         <FlexBox alignItems={FlexBoxAlignItems.Center}>
           <Calendar onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
         </FlexBox>
-        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "100%"}}>
-          <Card header={<CardHeader status={`${data.length} dataset`} subtitleText="Events for the day" titleText={selectedDate}/>}>
+        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "90%"}}>
+          <Card header={<CardHeader status={`${updatedData.length} dataset`} subtitleText="Events for the day" titleText={selectedDate}/>}>
             <Analystics data={updatedData} />
           </Card>
         </FlexBox>
