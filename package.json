@@ -10,6 +10,8 @@
     "@ui5/webcomponents-react-base": "^1.17.0",
     "@ui5/webcomponents-react-charts": "^1.17.1",
     "@ui5/webcomponents-theme-base": "^1.0.0-rc.16",
+    "json": "^11.0.0",
+    "json-loader": "^0.5.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.2",
