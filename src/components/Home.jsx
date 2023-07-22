@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, startTransition } from "react";
 import {
   Calendar,
   Card,
@@ -18,9 +18,13 @@ import data from './data.json';
 const Home = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [emphasizedButton, setEmphasizedButton] = useState(null);
+  const [updatedData, setData] = useState(data);
 
   const handleDateSelect = (event) => {
     setSelectedDate(event.detail.values[0]);
+    setData(data.filter((item) => {
+      return item.startDate == event.detail.values[0];
+    }))
   };
 
   useEffect(() => {
@@ -77,7 +81,7 @@ const Home = () => {
         </FlexBox>
         <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "100%"}}>
           <Card header={<CardHeader status={`${data.length} dataset`} subtitleText="Events for the day" titleText={selectedDate}/>}>
-            <Analystics data={data} />
+            <Analystics data={updatedData} />
           </Card>
         </FlexBox>
       </FlexBox>

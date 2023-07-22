@@ -3,30 +3,28 @@
       "eventName": "Talk on Artifical Intelligence",
       "status": "Success",
       "progress": 20,
+      "startDate": "Jul 19, 2023",
       "deadline": "12th May, 2023"
     },
     {
       "eventName": "SAP UI5 Workshop",
       "status": "Warning",
       "progress": 30,
+      "startDate": "Jul 19, 2023",
       "deadline": "17th May, 2023"
     },
     {
       "eventName": "NITW Hackathon",
       "status": "Error",
       "progress": 80,
+      "startDate": "Jul 20, 2023",
       "deadline": "12th May, 2023"
     },
     {
       "eventName": "Induction SAP",
       "status": "Information",
       "progress": 40,
+      "startDate": "Jul 21, 2023",
       "deadline": "20th May, 2023"
-    },
-    {
-        "eventName": "Induction SAP",
-        "status": "Information",
-        "progress": 40,
-        "deadline": "20th May, 2023"
-      }
+    }
 ]
