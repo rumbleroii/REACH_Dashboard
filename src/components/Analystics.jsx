@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { AnalyticalTable, Select, Option, ProgressIndicator } from '@ui5/webcomponents-react';
+import { AnalyticalTable, ProgressIndicator, FlexBox, Button } from '@ui5/webcomponents-react';
 const Analystics = (tableData) => {
   return (
     <AnalyticalTable
@@ -23,7 +23,21 @@ const Analystics = (tableData) => {
         Cell: (instance) => { 
             return <ProgressIndicator value={instance.cell.value}/> 
         }
-      }
+      },
+      {
+        Header: "Edit",
+        Cell: (instance) => {
+            const { cell, row, webComponentsReactProperties } = instance;
+            // disable buttons if overlay is active to prevent focus
+            const isOverlay = webComponentsReactProperties.showOverlay;
+            // console.log('This is your row data', row.original);
+            return (
+                <FlexBox>
+                    <Button icon="edit" disabled={isOverlay} />
+                </FlexBox>
+                );
+            }
+        }
     ]}
     data={tableData.data}
     filterable
