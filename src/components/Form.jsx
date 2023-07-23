@@ -121,7 +121,7 @@ const handleSubmit = (event) => {
   };
 
   return (
-    <div style={{ margin: '30px' }}>
+    <div style={{ margin: '30px', marginBottom:'40px' }}>
       <Form
         backgroundDesign="Transparent"
         columnsL={2}

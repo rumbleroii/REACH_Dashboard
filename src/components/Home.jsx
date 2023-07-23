@@ -9,6 +9,8 @@ import {
   FlexBoxJustifyContent,
 } from "@ui5/webcomponents-react";
 
+import { Link } from "react-router-dom"; // Step 1: Import Link
+
 import Analystics from "./Analystics";
 
 import "./Home.css";
@@ -90,15 +92,23 @@ const Home = () => {
             >
               {<b>Experience</b>}
             </Button>
+
             
       </FlexBox>
       </Card>
         
       <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "70vh", marginBottom:"80px", marginTop:"35px"}}>
+        
         <FlexBox alignItems={FlexBoxAlignItems.Center}>
           <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
         </FlexBox>
-        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", paddingLeft:"50px" }}>
+        
+        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", paddingLeft:"50px", display:"block" }}>
+        <Link to="/create-event">
+            <Button design="Emphasized" style={{marginLeft:"85%", marginBottom:"12px"}}>
+              <b>Create Event</b>
+            </Button>
+          </Link>
           <Card  header={<CardHeader status={`${updatedData.length} events`} subtitleText="Events for the day" titleText={selectedDate}/>}>
             <Analystics data={updatedData} />
           </Card>
