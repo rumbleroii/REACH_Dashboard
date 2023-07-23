@@ -39,12 +39,21 @@ const Home = () => {
     }))
   };
 
+  const handleAllEvent = () => {
+    setData(data);
+    setEmphasizedButton(null);
+    setSelectedDate("All Events");
+  }
   const handleButtonClick = (buttonName) => {
     setEmphasizedButton((prevButton) => {
+      if(prevButton === buttonName && selectedDate === "All Events") {
+        setData(data);
+        return null;
+      }
       if(prevButton === buttonName) {
         setData(data.filter((item) => item.startDate === selectedDate ))
         return null;
-      } else if(selectedDate == "All Events") {
+      } else if(selectedDate === "All Events") {
         setData(data.filter((item) => item.pillar === buttonName))
         return buttonName;
       } else {
@@ -109,6 +118,9 @@ const Home = () => {
               <b>Create Event</b>
             </Button>
           </Link>
+          <Button onClick={handleAllEvent} style={{marginBottom:"12px"}}>
+              <b>All Events</b>
+          </Button>
           <Card  header={<CardHeader status={`${updatedData.length} events`} subtitleText="Events for the day" titleText={selectedDate}/>}>
             <Analystics data={updatedData} />
           </Card>
