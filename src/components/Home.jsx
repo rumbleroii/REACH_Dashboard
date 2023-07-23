@@ -7,6 +7,7 @@ import {
   FlexBox,
   FlexBoxAlignItems,
   FlexBoxJustifyContent,
+  Text
 } from "@ui5/webcomponents-react";
 
 import { Link } from "react-router-dom"; // Step 1: Import Link
@@ -82,50 +83,49 @@ const Home = () => {
     <>
     <Card style={{ height: '100px'}}>
       <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{paddingTop:'25px'}}>
-            <Button
-              style={buttonStyle}
-              onClick={() =>  handleButtonClick("Research")}
-              design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
-            >
-              {<b>Research</b>}
-            </Button>
-            <Button
-              style={buttonStyle}
-              onClick={() => handleButtonClick("Learning")}
-              design={emphasizedButton === "Learning" ? "Emphasized" : "Default"}
-            >
-              {<b>Learning</b>}
-            </Button>
-            <Button
-              style={buttonStyle}
-              onClick={() => handleButtonClick("Experience")}
-              design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
-            >
-              {<b>Experience</b>}
-            </Button>              
-        </FlexBox>
-      </Card>
-        
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "60vh", marginBottom:"80px", marginTop:"35px"}}>
-        
-        <FlexBox alignItems={FlexBoxAlignItems.Center}>
-          <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
-        </FlexBox>
-        
-        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", marginLeft:"50px", display:"block" }}>
-          <Link to="/create-event">
-            <Button design="Emphasized" style={{float:"right", marginBottom:"12px"}}>
-              <b>Create Event</b>
-            </Button>
-          </Link>
-          <Button onClick={handleAllEvent} style={{marginBottom:"12px"}}>
-              <b>All Events</b>
-          </Button>
-          <Card  header={<CardHeader status={`${updatedData.length} events`} subtitleText="Events for the day" titleText={selectedDate}/>}>
-            <Analystics data={updatedData} />
-          </Card>
-        </FlexBox>
+        <Button
+          style={buttonStyle}
+          onClick={() =>  handleButtonClick("Research")}
+          design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
+        >
+          {<b>Research</b>}
+        </Button>
+        <Button
+          style={buttonStyle}
+          onClick={() => handleButtonClick("Learning")}
+          design={emphasizedButton === "Learning" ? "Emphasized" : "Default"}
+        >
+          {<b>Learning</b>}
+        </Button>
+        <Button
+          style={buttonStyle}
+          onClick={() => handleButtonClick("Experience")}
+          design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
+        >
+          {<b>Experience</b>}
+        </Button>              
       </FlexBox>
+    </Card>    
+    <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "60vh", marginBottom:"80px", marginTop:"35px"}}>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} direction="Column">
+        <Text style={{fontSize:"20px", margin:"10px"}}> Event Calender </Text>
+        <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
+      </FlexBox>
+        
+      <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", marginLeft:"50px", display:"block" }}>
+        <Link to="/create-event">
+          <Button design="Emphasized" style={{float:"right", marginBottom:"12px"}}>
+            <b>Create Event</b>
+          </Button>
+        </Link>
+        <Button onClick={handleAllEvent} style={{marginBottom:"12px"}}>
+          <b>All Events</b>
+        </Button>
+        <Card  header={<CardHeader status={`${updatedData.length} events`} subtitleText={emphasizedButton === null ? "All Categories" : emphasizedButton} titleText={selectedDate}/>}>
+          <Analystics data={updatedData} />
+        </Card>
+      </FlexBox>
+    </FlexBox>
     </>
   );
 };

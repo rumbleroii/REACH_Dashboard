@@ -14,7 +14,7 @@ const Analystics = (tableData) => {
         accessor: 'deadline'
       },
       {
-        Header: 'Pillar',
+        Header: 'Category',
         accessor: 'pillar'
       },
       {
