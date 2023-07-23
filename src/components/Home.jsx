@@ -69,12 +69,7 @@ const Home = () => {
 
   return (
     <>
-    <Card style={{
-
-    height: '100px',
-    
-    
-  }}>
+    <Card style={{ height: '100px'}}>
       <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{paddingTop:'25px'}}>
             <Button
               style={buttonStyle}
@@ -96,10 +91,8 @@ const Home = () => {
               design={emphasizedButton === "Experience" ? "Emphasized" : "Default"}
             >
               {<b>Experience</b>}
-            </Button>
-
-            
-      </FlexBox>
+            </Button>              
+        </FlexBox>
       </Card>
         
       <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "70vh", marginBottom:"80px", marginTop:"35px"}}>
@@ -108,8 +101,8 @@ const Home = () => {
           <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
         </FlexBox>
         
-        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", paddingLeft:"50px", display:"block" }}>
-        <Link to="/create-event">
+        <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", marginLeft:"50px", display:"block" }}>
+          <Link to="/create-event">
             <Button design="Emphasized" style={{float:"right", marginBottom:"12px"}}>
               <b>Create Event</b>
             </Button>
