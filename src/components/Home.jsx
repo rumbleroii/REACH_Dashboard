@@ -13,6 +13,7 @@ import Analystics from "./Analystics";
 
 import "./Home.css";
 import data from './data.json';
+import { sapUiLargeMarginBottom } from "@ui5/webcomponents-react-base/dist/styling/spacing";
 
 const Home = () => {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -52,7 +53,13 @@ const Home = () => {
 
   return (
     <>
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{paddingTop:"7vh"}}>
+    <Card style={{
+
+    height: '100px',
+    
+    
+  }}>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{paddingTop:'25px'}}>
             <Button
               style={buttonStyle}
               onClick={() => handleButtonClick("Research")}
@@ -74,14 +81,16 @@ const Home = () => {
             >
               {<b>Experience</b>}
             </Button>
+            
       </FlexBox>
+      </Card>
         
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "70vh"}}>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "70vh", marginBottom:"80px", marginTop:"35px"}}>
         <FlexBox alignItems={FlexBoxAlignItems.Center}>
-          <Calendar onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
+          <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
         </FlexBox>
         <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", paddingLeft:"50px" }}>
-          <Card header={<CardHeader status={`${updatedData.length} dataset`} subtitleText="Events for the day" titleText={selectedDate}/>}>
+          <Card  header={<CardHeader status={`${updatedData.length} events`} subtitleText="Events for the day" titleText={selectedDate}/>}>
             <Analystics data={updatedData} />
           </Card>
         </FlexBox>

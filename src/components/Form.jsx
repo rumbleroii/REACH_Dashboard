@@ -1,131 +1,250 @@
 import React, { useState } from 'react';
-
-import { Form, FormGroup, CheckBox,Select,Option, FormItem,MultiComboBox,MultiComboBoxItem, Label, Input, TextArea, DatePicker,TimePicker,MessageBox,Button } from '@ui5/webcomponents-react';
-
+import { Form, FormGroup, CheckBox, Select, Option, FormItem, MultiComboBox, MultiComboBoxItem, Label, Input, TextArea, DatePicker, TimePicker, MessageBox, Button } from '@ui5/webcomponents-react';
 import './Form.css'; // Import your custom CSS if needed
 
 const FormPage = () => {
-  const handleSubmit = () => {
-    // Handle form submission here
-    
-    // Show a popup with the event created message
+  const [formData, setFormData] = useState({
+    eventName: '',
+    online: false,
+    link: '',
+    venue: '',
+    eventType: '',
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: '',
+    eventDescription: '',
+    porName: '',
+    porEmail: '',
+    institutions: [],
+  });
+
+  const [formErrors, setFormErrors] = useState({});
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleMultiComboBoxChange = (event) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      institutions: event.detail.selectedItems.map((item) => item.text),
+    }));
+  };
+
+  // ...
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  const errors = validateForm();
+  if (Object.keys(errors).length === 0) {
+    // Handle form submission here (e.g., send data to the server)
+    // For this example, we'll show a success message and clear the form data
     MessageBox.success('Event created', {
       title: 'Success',
       onClose: () => {
-        // Perform any additional actions after the popup is closed
+        setFormData({
+          eventName: '',
+          online: false,
+          link: '',
+          venue: '',
+          eventType: '',
+          startDate: '',
+          startTime: '',
+          endDate: '',
+          endTime: '',
+          eventDescription: '',
+          porName: '',
+          porEmail: '',
+          institutions: [],
+        });
+        setFormErrors({});
       },
     });
-  };
+  } else {
+    setFormErrors(errors);
+  }
+};
+
+// ...
 
 
-  const [isOnline, setIsOnline] = useState(false);
+
 
   const handleOnlineChange = (event) => {
-    setIsOnline(event.target.checked);
+    const onlineValue = event.target.checked;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      online: onlineValue,
+      link: onlineValue ? prevFormData.link : '', // Set link if online, otherwise clear it
+      venue: onlineValue ? '' : prevFormData.venue, // Set venue if not online, otherwise clear it
+    }));
+  };
+
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.eventName) {
+      errors.eventName = '*required';
+    }
+    if (formData.online && !formData.link) {
+      errors.link = '*required for online events';
+    }
+    if (!formData.online && !formData.venue) {
+      errors.venue = '*required for in-person events';
+    }
+    if (!formData.eventType) {
+      errors.eventType = '*required';
+    }
+    if (!formData.startDate) {
+      errors.startDate = '*required';
+    }
+    if (!formData.startTime) {
+      errors.startTime = '*required';
+    }
+    if (!formData.endDate) {
+      errors.endDate = '*required';
+    }
+    if (!formData.endTime) {
+      errors.endTime = '*required';
+    }
+    if (!formData.porName) {
+      errors.porName = '*required';
+    }
+    if (!formData.porEmail) {
+      errors.porEmail = '* required';
+    }
+    return errors;
   };
 
   return (
-    <div style={{ margin: "30px"}}>
-    <Form
-      backgroundDesign="Transparent"
-      columnsL={2} // Set the number of columns for the form groups
-      columnsM={1}
-      columnsS={1}
-      columnsXL={3}
-      labelSpanL={4}
-      labelSpanM={2}
-      labelSpanS={12}
-      labelSpanXL={4}
-      titleText={<h1><b>Add Event</b></h1>}
-    >
-      <FormGroup titleText="Event Data">
-        <FormItem label="Event Name">
-          <Input placeholder="Enter event name" />
-        </FormItem>
-        <FormItem label="Online">
-          <CheckBox checked={isOnline} onChange={handleOnlineChange} 
-          />
-        </FormItem>
-
-        {isOnline ? (
-          <FormItem label="Link">
-            <Input placeholder="Enter the Link" />
+    <div style={{ margin: '30px' }}>
+      <Form
+        backgroundDesign="Transparent"
+        columnsL={2}
+        columnsM={1}
+        columnsS={1}
+        columnsXL={3}
+        labelSpanL={4}
+        labelSpanM={2}
+        labelSpanS={12}
+        labelSpanXL={4}
+        titleText={<h1><b>Add Event</b></h1>}
+      >
+        <FormGroup titleText="Event Data">
+          <FormItem label="Event Name">
+            <Input name="eventName" 
+            value={formData.eventName} 
+            onChange={handleInputChange} 
+            placeholder="Enter event name" />
+            {formErrors.eventName && (
+    <div  className='form-error'>{formErrors.eventName}</div>
+  )}
           </FormItem>
-        ) : (
-          <FormItem label={<Label>Venue <i></i></Label>}>
-            <Input placeholder="Enter the Venue" />
+          <FormItem label="Online">
+            <CheckBox name="online" checked={formData.online} onChange={handleOnlineChange} />
+           
           </FormItem>
-        )}
+          {formData.online ? (
+            <FormItem label="Link">
+              <Input name="link" value={formData.link} onChange={handleInputChange} placeholder="Enter the Link" />
+            {formErrors.link && (
+    <div  className='form-error'>{formErrors.link}</div>
+  )}
+            </FormItem>
+          ) : (
+            <FormItem label={<Label>Venue <i></i></Label>}>
+              <Input name="venue" value={formData.venue} onChange={handleInputChange} placeholder="Enter the Venue" />
+           {formErrors.venue && (
+    <div className='form-error'>{formErrors.venue}</div>
+  )}
+            </FormItem>
+          )}
 
-    <FormItem label="Event Type">
-      <Select>
-        <Option>
-          Research
-        </Option>
-        <Option>
-          Experience
-        </Option>
-        <Option>
-          Learning
-        </Option>
-      </Select>
-    </FormItem>
-         <FormItem label="Start Date">
-          <DatePicker placeholder="Select start date" />
-        </FormItem>
-        <FormItem label="Start Time">
-          <TimePicker placeholder="Select start time" />
-        </FormItem>
+          <FormItem label="Event Type">
+            <Select name="eventType" value={formData.eventType} onChange={handleInputChange}>
+              <Option>
+                Research
+              </Option>
+              <Option>
+                Experience
+              </Option>
+              <Option>
+                Learning
+              </Option>
+            </Select>
+            {formErrors.eventType && (
+    <div  className='form-error'>{formErrors.eventType}</div>
+  )}
+          </FormItem>
+          <FormItem label="Start Date">
+            <DatePicker name="startDate" value={formData.startDate} onChange={handleInputChange} placeholder="Select start date" />
+          {formErrors.startDate && (
+    <div  className='form-error'>{formErrors.startDate}</div>
+  )}
+          </FormItem>
+          <FormItem label="Start Time">
+            <TimePicker name="startTime" value={formData.startTime} onChange={handleInputChange} placeholder="Select start time" />
+          {formErrors.startTime && (
+    <div  className='form-error'>{formErrors.startTime}</div>
+  )}
+          </FormItem>
 
-        <FormItem label="End Date">
-          <DatePicker placeholder="Select end date" />
-        </FormItem>
-        <FormItem label="End Time">
-          <TimePicker placeholder="Select end time" />
-        </FormItem>
+          <FormItem label="End Date">
+            <DatePicker name="endDate" value={formData.endDate} onChange={handleInputChange} placeholder="Select end date" />
+          {formErrors.endDate && (
+    <div  className='form-error'>{formErrors.endDate}</div>
+  )}
+          </FormItem>
+          <FormItem label="End Time">
+            <TimePicker name="endTime" value={formData.endTime} onChange={handleInputChange} placeholder="Select end time" />
+          {formErrors.endTime && (
+    <div  className='form-error'>{formErrors.endTime}</div>
+  )}
+          </FormItem>
 
-        <FormItem label={<Label style={{ alignSelf: 'start', paddingTop: '0.25rem' }}>Event Description</Label>}>
-          <TextArea placeholder="Briefly tell us about your Event" rows={5} />
-        </FormItem>
-   </FormGroup>
-   
-  <FormGroup titleText="Point Of Responsbility Data">
-    <FormItem label="POR Name">
-      <Input 
-      placeholder='Enter POR name'/>
-    </FormItem>
-    <FormItem label="POR E-mail ID">
-      <Input 
-      placeholder='Enter email Id'/>
-    </FormItem>
-    
-    
-        <FormItem label="Insititutions">
-          
-          <MultiComboBox
-          placeholder='Select the Univeristies you want'
-  onChange={function ka(){}}
-  onInput={function ka(){}}
-  onOpenChange={function ka(){}}
-  onSelectionChange={function ka(){}}
->
-  <MultiComboBoxItem text="VJTI" />
-  <MultiComboBoxItem text="Cummins" />
-  <MultiComboBoxItem text="Amritha" />
-  <MultiComboBoxItem text="XXX" />
-  <MultiComboBoxItem text="YYY" />
-</MultiComboBox>
-        </FormItem>
-</FormGroup> 
-        
-    </Form>
-    
-    <div className="button-container">
-        <Button onClick={handleSubmit}>Submit</Button> {/* Add a submit button */}
-        </div>
-        
+          <FormItem label={<Label style={{ alignSelf: 'start', paddingTop: '0.25rem' }}>Event Description</Label>}>
+            <TextArea name="eventDescription" value={formData.eventDescription} onChange={handleInputChange} placeholder="Briefly tell us about your Event" rows={5} />
+          </FormItem>
+        </FormGroup>
+
+        <FormGroup titleText="Point Of Responsibility Data">
+          <FormItem label="POR Name">
+            <Input name="porName" value={formData.porName} onChange={handleInputChange} placeholder='Enter POR name' />
+         {formErrors.porName && (
+    <div  className='form-error'>{formErrors.porName}</div>
+  )}
+          </FormItem>
+          <FormItem label="POR E-mail ID">
+            <Input name="porEmail" value={formData.porEmail} onChange={handleInputChange} placeholder='Enter email Id' />
+          {formErrors.porEmail && (
+    <div  className='form-error'>{formErrors.porEmail}</div>
+  )}
+          </FormItem>
+          <FormItem label="Institutions">
+            <MultiComboBox
+              name="institutions"
+              selectedItems={formData.institutions.map((item) => ({ text: item }))}
+              onChange={handleMultiComboBoxChange}
+              placeholder='Select the Universities you want'
+            >
+              <MultiComboBoxItem text="VJTI" />
+              <MultiComboBoxItem text="Cummins" />
+              <MultiComboBoxItem text="Amritha" />
+              <MultiComboBoxItem text="XXX" />
+              <MultiComboBoxItem text="YYY" />
+            </MultiComboBox>
+          </FormItem>
+        </FormGroup>
+      </Form>
+      <div className="button-container">
+        <Button onClick={handleSubmit}>Submit</Button>
+      </div>
     </div>
   );
 };
 
-export default FormPage;
+export default FormPage
