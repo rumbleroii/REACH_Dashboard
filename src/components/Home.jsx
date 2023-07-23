@@ -16,29 +16,38 @@ import data from './data.json';
 import { sapUiLargeMarginBottom } from "@ui5/webcomponents-react-base/dist/styling/spacing";
 
 const Home = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("All Events");
   const [emphasizedButton, setEmphasizedButton] = useState(null);
   const [updatedData, setData] = useState(data);
 
-  useEffect(() => {
-    const currentDate = new Date();
-    setSelectedDate(currentDate.toDateString());
-  }, []);
+  // useEffect(() => {
+  //   const currentDate = new Date().toDateString();
+  //   const dateObj = currentDate.split(' ');
+    
+  //   const modifiedDate = dateObj[2] + " " + dateObj[1] + ", " + dateObj[3];
+  //   console.log(modifiedDate);
+  //   setSelectedDate(modifiedDate);
+  // }, []);
+
 
   const handleDateSelect = (event) => {
     setSelectedDate(event.detail.values[0]);
     setData(data.filter((item) => {
-      return item.startDate === event.detail.values[0] || item.pillar === emphasizedButton;
+      if(emphasizedButton === null) return item.startDate === event.detail.values[0];
+      else return item.startDate === event.detail.values[0] && item.pillar === emphasizedButton;
     }))
   };
 
   const handleButtonClick = (buttonName) => {
-    setData(data.filter((item) => {
-      return item.pillar === buttonName && item.startDate === selectedDate;
-    }))
-    setEmphasizedButton((prevButton) =>
-      prevButton === buttonName ? null : buttonName
-    );
+    setEmphasizedButton((prevButton) => {
+      if(prevButton === buttonName) {
+        setData(data.filter((item) => item.startDate === selectedDate ))
+        return null;
+      } else {
+        setData(data.filter((item) => item.pillar === buttonName && item.startDate === selectedDate ))
+        return buttonName;
+      }
+    });
   };
 
   const buttonStyle = {
@@ -62,7 +71,7 @@ const Home = () => {
       <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{paddingTop:'25px'}}>
             <Button
               style={buttonStyle}
-              onClick={() => handleButtonClick("Research")}
+              onClick={() =>  handleButtonClick("Research")}
               design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
             >
               {<b>Research</b>}
