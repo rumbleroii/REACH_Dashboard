@@ -15,29 +15,38 @@ import "./Home.css";
 import data from './data.json';
 
 const Home = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedDate, setSelectedDate] = useState("All Events");
   const [emphasizedButton, setEmphasizedButton] = useState(null);
   const [updatedData, setData] = useState(data);
 
-  useEffect(() => {
-    const currentDate = new Date();
-    setSelectedDate(currentDate.toDateString());
-  }, []);
+  // useEffect(() => {
+  //   const currentDate = new Date().toDateString();
+  //   const dateObj = currentDate.split(' ');
+    
+  //   const modifiedDate = dateObj[2] + " " + dateObj[1] + ", " + dateObj[3];
+  //   console.log(modifiedDate);
+  //   setSelectedDate(modifiedDate);
+  // }, []);
+
 
   const handleDateSelect = (event) => {
     setSelectedDate(event.detail.values[0]);
     setData(data.filter((item) => {
-      return item.startDate === event.detail.values[0] || item.pillar === emphasizedButton;
+      if(emphasizedButton === null) return item.startDate === event.detail.values[0];
+      else return item.startDate === event.detail.values[0] && item.pillar === emphasizedButton;
     }))
   };
 
   const handleButtonClick = (buttonName) => {
-    setData(data.filter((item) => {
-      return item.pillar === buttonName && item.startDate === selectedDate;
-    }))
-    setEmphasizedButton((prevButton) =>
-      prevButton === buttonName ? null : buttonName
-    );
+    setEmphasizedButton((prevButton) => {
+      if(prevButton === buttonName) {
+        setData(data.filter((item) => item.startDate === selectedDate ))
+        return null;
+      } else {
+        setData(data.filter((item) => item.pillar === buttonName && item.startDate === selectedDate ))
+        return buttonName;
+      }
+    });
   };
 
   const buttonStyle = {
@@ -52,10 +61,11 @@ const Home = () => {
 
   return (
     <>
+      {console.log(emphasizedButton)}
       <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{paddingTop:"7vh"}}>
             <Button
               style={buttonStyle}
-              onClick={() => handleButtonClick("Research")}
+              onClick={() =>  handleButtonClick("Research")}
               design={emphasizedButton === "Research" ? "Emphasized" : "Default"}
             >
               {<b>Research</b>}
@@ -81,7 +91,7 @@ const Home = () => {
           <Calendar onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>
         </FlexBox>
         <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", paddingLeft:"50px" }}>
-          <Card header={<CardHeader status={`${updatedData.length} dataset`} subtitleText="Events for the day" titleText={selectedDate}/>}>
+          <Card header={<CardHeader subtitleText={`${updatedData.length} dataset`} titleText={selectedDate}/>}>
             <Analystics data={updatedData} />
           </Card>
         </FlexBox>
