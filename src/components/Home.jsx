@@ -27,13 +27,13 @@ const Home = () => {
   const handleDateSelect = (event) => {
     setSelectedDate(event.detail.values[0]);
     setData(data.filter((item) => {
-      return item.startDate == event.detail.values[0] && item.pillar == emphasizedButton;
+      return item.startDate === event.detail.values[0] || item.pillar === emphasizedButton;
     }))
   };
 
   const handleButtonClick = (buttonName) => {
     setData(data.filter((item) => {
-      return item.pillar == buttonName && item.startDate == selectedDate;
+      return item.pillar === buttonName && item.startDate === selectedDate;
     }))
     setEmphasizedButton((prevButton) =>
       prevButton === buttonName ? null : buttonName
