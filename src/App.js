@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { MyApp } from "./MyApp";
@@ -22,6 +22,22 @@ function App() {
   const addEvent = (eventData) => {
     setEvents([...events, eventData]);
   };
+
+  
+  useEffect(() => {
+    // Get the events data from localStorage when the application starts
+    const storedEvents = localStorage.getItem('events');
+    if (storedEvents) {
+      setEvents(JSON.parse(storedEvents));
+    } else {
+      setEvents(data); // Fallback to the initial data from data.json
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save the events data to localStorage whenever it changes
+    localStorage.setItem('events', JSON.stringify(events));
+  }, [events]);
 
   return (
     <>

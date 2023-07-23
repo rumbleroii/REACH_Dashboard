@@ -110,7 +110,7 @@ const Home = () => {
         
         <FlexBox alignItems={FlexBoxAlignItems.Center}  style={{ width: "60%", paddingLeft:"50px", display:"block" }}>
         <Link to="/create-event">
-            <Button design="Emphasized" style={{marginLeft:"85%", marginBottom:"12px"}}>
+            <Button design="Emphasized" style={{float:"right", marginBottom:"12px"}}>
               <b>Create Event</b>
             </Button>
           </Link>
