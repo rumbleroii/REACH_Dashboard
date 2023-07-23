@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Footer from "./components/Footer";
 import Navigation from "./components/Navigation";
 import Form from "./components/Form";
+import Mou from "./components/Mou";
 
 import { setTheme } from '@ui5/webcomponents-base/dist/config/Theme';
 import '@ui5/webcomponents-react/dist/Assets';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/create-event" element={<Form/>}></Route>
         <Route path="/myapp" element={<MyApp />} />
         <Route path="/" element={<Home />} />
+        <Route path="/Mou" element={<Mou/>}/>
       </Routes>
      <Footer /> 
     </>
