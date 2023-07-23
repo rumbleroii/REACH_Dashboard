@@ -31,7 +31,6 @@ const Home = () => {
   //   setSelectedDate(modifiedDate);
   // }, []);
 
-
   const handleDateSelect = (event) => {
     setSelectedDate(event.detail.values[0]);
     setData(data.filter((item) => {
@@ -45,6 +44,9 @@ const Home = () => {
       if(prevButton === buttonName) {
         setData(data.filter((item) => item.startDate === selectedDate ))
         return null;
+      } else if(selectedDate == "All Events") {
+        setData(data.filter((item) => item.pillar === buttonName))
+        return buttonName;
       } else {
         setData(data.filter((item) => item.pillar === buttonName && item.startDate === selectedDate ))
         return buttonName;
@@ -95,7 +97,7 @@ const Home = () => {
         </FlexBox>
       </Card>
         
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "70vh", marginBottom:"80px", marginTop:"35px"}}>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "60vh", marginBottom:"80px", marginTop:"35px"}}>
         
         <FlexBox alignItems={FlexBoxAlignItems.Center}>
           <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>

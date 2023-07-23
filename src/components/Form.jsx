@@ -18,6 +18,9 @@ import {
   TimePicker,
   MessageBox,
   Button,
+  FlexBox,
+  FlexBoxAlignItems,
+  FlexBoxJustifyContent,
 } from "@ui5/webcomponents-react";
 import "./Form.css"; // Import your custom CSS if needed
 
@@ -302,7 +305,7 @@ const FormPage = ({addEvent}) => {
             />
           </FormItem>
         </FormGroup>
-
+        
         <FormGroup titleText="Point Of Responsibility Data">
           <FormItem label="POR Name">
             <Input
@@ -344,9 +347,9 @@ const FormPage = ({addEvent}) => {
           </FormItem>
         </FormGroup>
       </Form>
-      <div className="button-container">
-        <Button onClick={handleSubmit}>Submit</Button>
-      </div>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center}>
+        <Button style={{ width:"120px", margin:"30px"}} design="Emphasized" onClick={handleSubmit}>Submit</Button>
+      </FlexBox>
     </div>
   );
 };
