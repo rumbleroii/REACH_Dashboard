@@ -52,6 +52,11 @@ const Home = () => {
     });
   };
 
+    // Function to add a new event to the state
+    const addEvent = (eventData) => {
+      setData([...updatedData, eventData]);
+    };
+
   const buttonStyle = {
     width: "170px",
     height: "46px",

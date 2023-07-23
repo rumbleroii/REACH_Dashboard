@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom"; // Import useHistory hook
+import { useHistory } from "react-router-dom"; // Step 1: Import useHistory
+import data from './data.json';
 import {
   Form,
   FormGroup,
@@ -19,7 +21,7 @@ import {
 } from "@ui5/webcomponents-react";
 import "./Form.css"; // Import your custom CSS if needed
 
-const FormPage = () => {
+const FormPage = ({addEvent}) => {
   const Navigate = useNavigate(); // Initialize useHistory hook
   const [formData, setFormData] = useState({
     eventName: "",
@@ -55,35 +57,58 @@ const FormPage = () => {
   };
 
   // ...
-
   const handleSubmit = (event) => {
     event.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
-      // Handle form submission here (e.g., send data to the server)
-      // For this example, we'll show a success message and clear the form data
-      alert("Event created");
+      // Create an object with the form data
+      const newEvent = {
+        eventName: formData.eventName,
+        online: formData.online,
+        link: formData.link,
+        venue: formData.venue,
+        eventType: formData.eventType,
+        startDate: formData.startDate,
+        startTime: formData.startTime,
+        endDate: formData.endDate,
+        endTime: formData.endTime,
+        eventDescription: formData.eventDescription,
+        porName: formData.porName,
+        porEmail: formData.porEmail,
+        institutions: formData.institutions,
+      };
+
+      // Add the new event to the data array
+      data.push(newEvent);
+
+      // Show success message
+      alert('Event created');
+
+      // Clear the form data
       setFormData({
-        eventName: "",
+        eventName: '',
         online: false,
-        link: "",
-        venue: "",
-        eventType: "",
-        startDate: "",
-        startTime: "",
-        endDate: "",
-        endTime: "",
-        eventDescription: "",
-        porName: "",
-        porEmail: "",
+        link: '',
+        venue: '',
+        eventType: '',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+        eventDescription: '',
+        porName: '',
+        porEmail: '',
         institutions: [],
       });
-      setFormErrors({});
-      Navigate("/"); // Redirect to the home page after clicking submit
+
+      // Navigate back to the home page
+      Navigate('/');
     } else {
       setFormErrors(errors);
     }
   };
+
+
 
   // ...
 
