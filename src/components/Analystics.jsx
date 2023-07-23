@@ -14,7 +14,7 @@ const Analystics = (tableData) => {
         accessor: 'deadline'
       },
       {
-        Header: 'Pillar',
+        Header: 'Category',
         accessor: 'pillar'
       },
       {
@@ -24,20 +24,20 @@ const Analystics = (tableData) => {
             return <ProgressIndicator value={instance.cell.value}/> 
         }
       },
-      {
-        Header: "Edit",
-        Cell: (instance) => {
-            const { cell, row, webComponentsReactProperties } = instance;
-            // disable buttons if overlay is active to prevent focus
-            const isOverlay = webComponentsReactProperties.showOverlay;
-            // console.log('This is your row data', row.original);
-            return (
-                <FlexBox>
-                    <Button icon="edit" disabled={isOverlay} />
-                </FlexBox>
-                );
-            }
-        }
+      // {
+      //   Header: "Edit",
+      //   Cell: (instance) => {
+      //       const { cell, row, webComponentsReactProperties } = instance;
+      //       // disable buttons if overlay is active to prevent focus
+      //       const isOverlay = webComponentsReactProperties.showOverlay;
+      //       // console.log('This is your row data', row.original);
+      //       return (
+      //           <FlexBox>
+      //               <Button icon="edit" disabled={isOverlay} />
+      //           </FlexBox>
+      //           );
+      //       }
+      //   }
     ]}
     data={tableData.data}
     filterable

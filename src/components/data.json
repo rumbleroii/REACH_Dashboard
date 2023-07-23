@@ -1,3 +1,4 @@
+
 [
     {
       "eventName": "Talk on Artifical Intelligence",
@@ -30,5 +31,37 @@
       "pillar": "Research",
       "startDate": "Jul 21, 2023",
       "deadline": "20th May, 2023"
+    },
+    {
+      "eventName": "Induction SAP",
+      "status": "Information",
+      "progress": 40,
+      "pillar": "Research",
+      "startDate": "Jul 21, 2023",
+      "deadline": "20th May, 2023"
+    },
+    {
+      "eventName": "Induction SAP",
+      "status": "Information",
+      "progress": 40,
+      "pillar": "Research",
+      "startDate": "Jul 21, 2023",
+      "deadline": "20th May, 2023"
+    },
+    {
+      "eventName": "Induction SAP",
+      "status": "Information",
+      "progress": 40,
+      "pillar": "Research",
+      "startDate": "Jul 21, 2023",
+      "deadline": "20th May, 2023"
+    },
+    {
+      "eventName": "NITW Hackathon",
+      "status": "Error",
+      "progress": 80,
+      "pillar": "Experience",
+      "startDate": "Jul 20, 2023",
+      "deadline": "12th May, 2023"
     }
 ]
