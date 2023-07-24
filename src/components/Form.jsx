@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom"; // Import useHistory hook
 import { useHistory } from "react-router-dom"; // Step 1: Import useHistory
-import data from './data.json';
+
+import axios from "axios";
+
 import {
   Form,
   FormGroup,
@@ -65,24 +67,42 @@ const FormPage = ({addEvent}) => {
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
       // Create an object with the form data
+      // const newEvent = {
+      //   eventName: formData.eventName,
+      //   online: formData.online,
+      //   link: formData.link,
+      //   venue: formData.venue,
+      //   eventType: formData.eventType,
+      //   startDate: formData.startDate,
+      //   startTime: formData.startTime,
+      //   endDate: formData.endDate,
+      //   endTime: formData.endTime,
+      //   eventDescription: formData.eventDescription,
+      //   porName: formData.porName,
+      //   porEmail: formData.porEmail,
+      //   institutions: formData.institutions,
+      // };
+
       const newEvent = {
         eventName: formData.eventName,
-        online: formData.online,
-        link: formData.link,
-        venue: formData.venue,
-        eventType: formData.eventType,
+        status: "Success",
+        progress: 40,
+        pillar: formData.eventType,
         startDate: formData.startDate,
-        startTime: formData.startTime,
-        endDate: formData.endDate,
-        endTime: formData.endTime,
-        eventDescription: formData.eventDescription,
-        porName: formData.porName,
-        porEmail: formData.porEmail,
-        institutions: formData.institutions,
-      };
+        deadline: formData.endDate
+      }
 
-      // Add the new event to the data array
-      data.push(newEvent);
+      console.log(newEvent);
+
+
+      // Axios post
+      axios.post("http://localhost:4000/create", newEvent)
+      .then((res) => {
+        console.log("POSTED");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
 
       // Show success message
       alert('Event created');
@@ -104,8 +124,6 @@ const FormPage = ({addEvent}) => {
         institutions: [],
       });
 
-      // Navigate back to the home page
-      Navigate('/');
     } else {
       setFormErrors(errors);
     }

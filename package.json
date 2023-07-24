@@ -10,6 +10,7 @@
     "@ui5/webcomponents-react-base": "^1.17.0",
     "@ui5/webcomponents-react-charts": "^1.17.1",
     "@ui5/webcomponents-theme-base": "^1.0.0-rc.16",
+    "axios": "^1.4.0",
     "json": "^11.0.0",
     "json-loader": "^0.5.7",
     "react": "^18.2.0",
@@ -48,10 +49,5 @@
     "@ui5/webcomponents-cypress-commands": "^1.16.0",
     "cypress": "^12.17.1",
     "styled-components": "^5.3.1"
- 
-
-
-  
   }
-  
 }
