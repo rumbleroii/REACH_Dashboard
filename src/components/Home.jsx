@@ -106,7 +106,7 @@ const Home = () => {
         </Button>              
       </FlexBox>
     </Card>    
-    <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "60vh", marginBottom:"80px", marginTop:"35px"}}>
+    <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ height: "60vh", marginBottom:"80px", marginTop:"35px", marginLeft:"10px", marginRight:"10px"}}>
       <FlexBox alignItems={FlexBoxAlignItems.Center} direction="Column">
         <Text style={{fontSize:"20px", margin:"10px"}}> Event Calender </Text>
         <Calendar style={{boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)'}} onSelectedDatesChange={handleDateSelect} primaryCalendarType="Gregorian"/>

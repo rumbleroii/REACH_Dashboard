@@ -1,8 +1,8 @@
 import React from 'react';
-import { FlexBox, Card,Text } from '@ui5/webcomponents-react';
+import { FlexBox, Card, Text, FlexBoxJustifyContent, FlexBoxAlignItems } from '@ui5/webcomponents-react';
 
 const Mou = () => {
-  const imageStyle = { width: '150px', height: '150px', marginRight: '10px', marginLeft: '5px' };
+  const imageStyle = { width: '150px', height: '150px', marginRight: '10px', marginLeft: '10px'};
 
   const containerStyle = {
     display: 'flex',
@@ -23,8 +23,9 @@ const Mou = () => {
   };
 
   const flexBoxStyle = {
-    marginTop: '10px',
-    marginBottom: '20px', // Gap between each row (vertical)
+    alignItems:"center",
+    marginTop: "10px",
+    marginBottom: '10px', // Gap between each row (vertical)
   };
 
   const handleCardHover = (event) => {
@@ -40,30 +41,30 @@ const Mou = () => {
   return (
     <div style={containerStyle}>
        <FlexBox style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50px' ,width:'100%'}}>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
-        <Text style={{ textAlign: 'center' }}>
-          <h2>MOU'S</h2>
-          <h3>We will have our collabs here</h3>
-        </Text>
-      </div>
-    </FlexBox>
-      <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-        <FlexBox style={flexBoxStyle}>
-          <span>
-            <img
-              alt="img-sample 1"
-              src="https://tse2.mm.bing.net/th?id=OIP.89-F-DN0rRU5wPWRtr8gLQHaHa&pid=Api"
-              style={imageStyle}
-            />
-          </span>
-          <span>
-            <p>
-              Candidates wanting to study in Germany would obviously want to apply to the top universities in
-              Germany. While German Public universities would have a more detailed admission procedure, admission to
-              private universities is relatively easier.
-            </p>
-          </span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
+            <Text style={{ textAlign: 'center' }}>
+              <h2>MOU'S</h2>
+              <h3>We will have our collabs here</h3>
+            </Text>
+          </div>
         </FlexBox>
+        <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
+          <FlexBox style={flexBoxStyle}>
+            <span>
+              <img
+                alt="img-sample 1"
+                src="https://tse2.mm.bing.net/th?id=OIP.89-F-DN0rRU5wPWRtr8gLQHaHa&pid=Api"
+                style={imageStyle}
+              />
+            </span>
+            <span>
+              <p>
+                Candidates wanting to study in Germany would obviously want to apply to the top universities in
+                Germany. While German Public universities would have a more detailed admission procedure, admission to
+                private universities is relatively easier.
+              </p>
+            </span>
+          </FlexBox>
       </Card>
 
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>

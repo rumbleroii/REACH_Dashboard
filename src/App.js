@@ -45,10 +45,9 @@ function App() {
       <Navigation />
       <Routes>
         <Route path="/create-event" element={<Form/>}></Route>
-        <Route path="/myapp" element={<MyApp />} />
         <Route path="/" element={<Home />} />
-        <Route path="/Mou" element={<Mou/>}/>
-      <Route path="/create-event" element={<Form addEvent={addEvent} />} />
+        <Route path="/mou" element={<Mou/>}/>
+        <Route path="/create-event" element={<Form addEvent={addEvent} />} />
         <Route path="/" element={<Home events={events} />} />
       </Routes>
       <Footer />
