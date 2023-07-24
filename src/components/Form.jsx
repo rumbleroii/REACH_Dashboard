@@ -92,9 +92,6 @@ const FormPage = ({addEvent}) => {
         deadline: formData.endDate
       }
 
-      console.log(newEvent);
-
-
       // Axios post
       axios.post("http://localhost:4000/create", newEvent)
       .then((res) => {
