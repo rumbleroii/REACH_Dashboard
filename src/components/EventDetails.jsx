@@ -54,87 +54,87 @@ const EventDetails = () => {
 
   return (
     <div className="event-details-container">
-    {loading ? (
-      <div>Loading...</div>
-    ) : error ? (
-      <div className="event-details-error">{error}</div>
-    ) : !event ? (
-      <div>Event not found</div>
-    ) : (
-      <>
-        <h2 className="event-details-header">{event.eventName}</h2>
-        <div className="event-details-field">
-          <div className="event-details-label">Event ID:</div>
-          <div className="event-details-value">{event.eventId}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Deadline:</div>
-          <div className="event-details-value">{event.deadline}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Status:</div>
-          <div className="event-details-value">
-            <span className={`event-details-status`}>{event.status}</span>
-          </div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Category:</div>
-          <div className="event-details-value">{event.pillar}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Progress:</div>
-          <div className="event-details-value">
-            <ProgressIndicator
-              value={event.progress / 100}
-              displayValue={`${event.progress}%`}
-              className="event-details-progress"
-            >
-              <div
-                className="event-details-progress-value"
-                style={{ width: `${event.progress}%` }}
-              />
-            </ProgressIndicator>
-          </div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Start Date:</div>
-          <div className="event-details-value">{event.startDate}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Start Time:</div>
-          <div className="event-details-value">{event.startTime}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">End Date:</div>
-          <div className="event-details-value">{event.endDate}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">End Time:</div>
-          <div className="event-details-value">{event.endTime}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">Event Description:</div>
-          <div className="event-details-value">{event.eventDescription}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">POR Name:</div>
-          <div className="event-details-value">{event.porName}</div>
-        </div>
-        <div className="event-details-field">
-          <div className="event-details-label">POR E-mail ID:</div>
-          <div className="event-details-value">{event.porEmail}</div>
-        </div>
-        {event.institutions && (
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div className="event-details-error">{error}</div>
+      ) : !event ? (
+        <div>Event not found</div>
+      ) : (
+        <>
+          <h2 className="event-details-header">Event Details</h2>
           <div className="event-details-field">
-            <div className="event-details-label">Institutions:</div>
+            <div className="event-details-label">Event ID:</div>
+            <div className="event-details-value">{event.eventId}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Deadline:</div>
+            <div className="event-details-value">{event.deadline}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Status:</div>
             <div className="event-details-value">
-              {event.institutions.join(', ')}
+              <span className={`event-details-status`}>{event.status}</span>
             </div>
           </div>
-        )}
-      </>
-    )}
-  </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Category:</div>
+            <div className="event-details-value">{event.pillar}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Progress:</div>
+            <div className="event-details-value">
+              <ProgressIndicator
+                value={event.progress / 100}
+                displayValue={`${event.progress}%`}
+                className="event-details-progress"
+              >
+                <div
+                  className="event-details-progress-value"
+                  style={{ width: `${event.progress}%` }}
+                />
+              </ProgressIndicator>
+            </div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Start Date:</div>
+            <div className="event-details-value">{event.startDate}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Start Time:</div>
+            <div className="event-details-value">{event.startTime}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">End Date:</div>
+            <div className="event-details-value">{event.endDate}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">End Time:</div>
+            <div className="event-details-value">{event.endTime}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">Event Description:</div>
+            <div className="event-details-value">{event.eventDescription}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">POR Name:</div>
+            <div className="event-details-value">{event.porName}</div>
+          </div>
+          <div className="event-details-field">
+            <div className="event-details-label">POR E-mail ID:</div>
+            <div className="event-details-value">{event.porEmail}</div>
+          </div>
+          {event.institutions && (
+            <div className="event-details-field">
+              <div className="event-details-label">Institutions:</div>
+              <div className="event-details-value">
+                {event.institutions.join(', ')}
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

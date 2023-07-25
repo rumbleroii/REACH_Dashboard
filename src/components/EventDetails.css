@@ -9,10 +9,12 @@
   .event-details-header {
     font-size: 24px;
     font-weight: bold;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
     margin-bottom: 10px;
   }
   
   .event-details-field {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
