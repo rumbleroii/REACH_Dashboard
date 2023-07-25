@@ -19,7 +19,7 @@ const Analystics = ({ tableData }) => {
           accessor: 'eventName',
           minWidth: 200,
           Cell: (instance) => (
-            <Link to={`/event-details/${instance.row.original.id}`}> {/* Replace "/event-details" with the actual URL of the event details page */}
+            <Link to={`/event-details/${instance.row.original.id}`}> 
               {instance.cell.value}
             </Link>
           ),
