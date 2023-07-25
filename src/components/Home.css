@@ -17,4 +17,8 @@
   max-width: 200px; /* Adjust the button width as needed */
 }
 
-  
+  /* Prevent the link from changing its color after being visited */
+a {
+  color: #007bff; /* Set the link color to your desired color */
+  text-decoration: none; /* Remove the default underline */
+}

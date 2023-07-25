@@ -16,5 +16,12 @@
     "pillar": "Learning",
     "startDate": "Jul 19, 2023",
     "deadline": "12th May, 2023"
+  },
+  {
+    "eventName": "hello",
+    "status": "Success",
+    "progress": 40,
+    "startDate": "Jul 19, 2023",
+    "deadline": "Jul 19, 2023"
   }
 ]
