@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
 import { AnalyticalTable, ProgressIndicator, ObjectStatus,FlexBox,Button } from '@ui5/webcomponents-react';
 
@@ -25,8 +26,12 @@ const Analystics = ({ tableData }) => {
           ),
         },
         {
-          Header: 'Deadline',
-          accessor: 'deadline',
+          Header: 'Start Date',
+          accessor: 'startDate',
+        },
+        {
+          Header: 'End Date',
+          accessor: 'endDate',
         },
         {
           Header: 'Status',
@@ -41,7 +46,7 @@ const Analystics = ({ tableData }) => {
         },
         {
           Header: 'Category',
-          accessor: 'pillar',
+          accessor: 'eventType',
         },
         {
           Header: 'Progress',

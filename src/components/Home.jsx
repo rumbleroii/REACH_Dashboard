@@ -41,7 +41,7 @@ const Home = () => {
         else
           return (
             item.startDate === event.detail.values[0] &&
-            item.pillar === emphasizedButton
+            item.eventType === emphasizedButton
           );
       })
     );
@@ -62,13 +62,13 @@ const Home = () => {
         setData(data.filter((item) => item.startDate === selectedDate));
         return null;
       } else if (selectedDate === "All Events") {
-        setData(data.filter((item) => item.pillar === buttonName));
+        setData(data.filter((item) => item.eventType === buttonName));
         return buttonName;
       } else {
         setData(
           data.filter(
             (item) =>
-              item.pillar === buttonName && item.startDate === selectedDate
+              item.eventType === buttonName && item.startDate === selectedDate
           )
         );
         return buttonName;

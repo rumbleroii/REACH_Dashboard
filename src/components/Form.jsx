@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom"; // Import useHistory hook
 
 import axios from "axios";
+
+import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 
 import {
   Form,
@@ -22,21 +23,28 @@ import {
   FlexBox,
   FlexBoxAlignItems,
   FlexBoxJustifyContent,
+  Dialog,
+  Bar
 } from "@ui5/webcomponents-react";
-import "./Form.css"; // Import your custom CSS if needed
+
+import "./Form.css";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const FormPage = ({addEvent}) => {
-  const Navigate = useNavigate(); // Initialize useHistory hook
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     eventName: "",
     online: false,
     link: "",
     venue: "",
-    eventType: "",
+    eventType: "Research",
     startDate: "",
     startTime: "",
     endDate: "",
     endTime: "",
+    status: "Success",
+    progress: 0,
     eventDescription: "",
     porName: "",
     porEmail: "",
@@ -46,10 +54,13 @@ const FormPage = ({addEvent}) => {
   const [formErrors, setFormErrors] = useState({});
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
+    let { name, value } = event.target;
+    if(name === "eventType") value = event.detail.selectedOption.value;
+    if(name === "status") value = event.detail.selectedOption.value;
+    console.log(value);
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      [name]: value
     }));
   };
 
@@ -60,36 +71,31 @@ const FormPage = ({addEvent}) => {
     }));
   };
 
-  // ...
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
-      // Create an object with the form data
-      // const newEvent = {
-      //   eventName: formData.eventName,
-      //   online: formData.online,
-      //   link: formData.link,
-      //   venue: formData.venue,
-      //   eventType: formData.eventType,
-      //   startDate: formData.startDate,
-      //   startTime: formData.startTime,
-      //   endDate: formData.endDate,
-      //   endTime: formData.endTime,
-      //   eventDescription: formData.eventDescription,
-      //   porName: formData.porName,
-      //   porEmail: formData.porEmail,
-      //   institutions: formData.institutions,
-      // };
 
       const newEvent = {
         eventName: formData.eventName,
-        status: "Success",
-        progress: 40,
-        pillar: formData.eventType,
+        online: formData.online,
+        link: formData.link,
+        venue: formData.venue,
+        eventType: formData.eventType,
         startDate: formData.startDate,
-        deadline: formData.endDate
-      }
+        startTime: formData.startTime,
+        endDate: formData.endDate,
+        endTime: formData.endTime,
+        eventDescription: formData.eventDescription,
+        status: formData.status,
+        progress: 0,
+        porName: formData.porName,
+        porEmail: formData.porEmail,
+        institutions: formData.institutions,
+      };
+
+      console.log(formData.eventType);
 
       // Axios post
       axios.post("http://localhost:4000/create", newEvent)
@@ -101,7 +107,7 @@ const FormPage = ({addEvent}) => {
       })
 
       // Show success message
-      alert('Event created');
+      setOpen(true);
 
       // Clear the form data
       setFormData({
@@ -115,8 +121,10 @@ const FormPage = ({addEvent}) => {
         endDate: '',
         endTime: '',
         eventDescription: '',
+        status: '',
         porName: '',
         porEmail: '',
+        progress: 0,
         institutions: [],
       });
 
@@ -124,10 +132,6 @@ const FormPage = ({addEvent}) => {
       setFormErrors(errors);
     }
   };
-
-
-
-  // ...
 
   const handleOnlineChange = (event) => {
     const onlineValue = event.target.checked;
@@ -150,9 +154,6 @@ const FormPage = ({addEvent}) => {
     if (!formData.online && !formData.venue) {
       errors.venue = "*required for in-person events";
     }
-    // if (!formData.eventType) {
-    //   errors.eventType = '*required';
-    // }
     if (!formData.startDate) {
       errors.startDate = "*required";
     }
@@ -173,6 +174,16 @@ const FormPage = ({addEvent}) => {
     }
     return errors;
   };
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleClose = () => {
+    setOpen(false);
+  }
 
   return (
     <div style={{ margin: "30px", marginBottom: "40px" }}>
@@ -249,9 +260,9 @@ const FormPage = ({addEvent}) => {
               value={formData.eventType}
               onChange={handleInputChange}
             >
-              <Option>Research</Option>
-              <Option>Experience</Option>
-              <Option>Learning</Option>
+              <Option value="Research">Research</Option>
+              <Option value="Experience">Experience</Option>
+              <Option value="Learning">Learning</Option>
             </Select>
             {formErrors.eventType && (
               <div className="form-error">{formErrors.eventType}</div>
@@ -318,6 +329,21 @@ const FormPage = ({addEvent}) => {
               rows={5}
             />
           </FormItem>
+          <FormItem label="Event Status">
+            <Select
+              name="status"
+              value={formData.status}
+              onChange={handleInputChange}
+            >
+              <Option value="Success">On-time</Option>
+              <Option value="Warning">Delayed</Option>
+              <Option value="Error">Cancelled</Option>
+              <Option value="Information">Completed</Option>
+            </Select>
+            {formErrors.eventType && (
+              <div className="form-error">{formErrors.status}</div>
+            )}
+          </FormItem>
         </FormGroup>
         
         <FormGroup titleText="Point Of Responsibility Data">
@@ -361,8 +387,20 @@ const FormPage = ({addEvent}) => {
           </FormItem>
         </FormGroup>
       </Form>
-      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center}>
+      <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center}>                        
         <Button style={{ width:"120px", margin:"30px"}} design="Emphasized" onClick={handleSubmit}>Submit</Button>
+        {open && (<MessageBox
+          onAfterOpen={function ka(){}}
+          onBeforeClose={function ka(){}}
+          onBeforeOpen={function ka(){}}
+          onClose={function ka(){
+            setOpen(false);
+          }}
+          open
+          type="Submit"
+        >
+          Form Submitted!
+        </MessageBox>)}
       </FlexBox>
     </div>
   );
