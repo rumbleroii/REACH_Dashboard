@@ -136,7 +136,7 @@ const Home = () => {
         }}
       >
         <FlexBox alignItems={FlexBoxAlignItems.Center} direction="Column">
-          <Text style={{ fontSize: "20px", margin: "10px" }}>
+          <Text style={{ fontSize: "20px", margin: "10px", color:'grey' }}>
             {" "}
             Event Calender{" "}
           </Text>
