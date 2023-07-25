@@ -7,5 +7,14 @@
     "pillar": "Research",
     "startDate": "Jul 19, 2023",
     "deadline": "12th May, 2023"
+  },
+  {
+    "id": 3,
+    "eventName": "SAP Talkies",
+    "status": "Information",
+    "progress": 40,
+    "pillar": "Learning",
+    "startDate": "Jul 19, 2023",
+    "deadline": "12th May, 2023"
   }
 ]

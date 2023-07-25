@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom"; // Import useHistory hook
-import { useHistory } from "react-router-dom"; // Step 1: Import useHistory
 
 import axios from "axios";
 

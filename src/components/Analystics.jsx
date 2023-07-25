@@ -1,6 +1,15 @@
 import React from 'react'
 
-import { AnalyticalTable, ProgressIndicator, FlexBox, Button } from '@ui5/webcomponents-react';
+import { AnalyticalTable, ProgressIndicator, FlexBox, Button, Text, ObjectStatus } from '@ui5/webcomponents-react';
+
+// Status
+const statusObject = {
+  "Success": "On-Time",
+  "Warning": "Delayed",
+  "Information": "Completed",
+  "Error": "Cancelled",
+}
+
 const Analystics = (tableData) => {
   return (
     <AnalyticalTable
@@ -8,18 +17,27 @@ const Analystics = (tableData) => {
       {
         Header: 'Event Title',
         accessor: 'eventName',
+        minWidth: 200
       },
       {
         Header: 'Deadline',
-        accessor: 'deadline'
+        accessor: 'deadline',
+      },
+      {
+        Header: 'Status',
+        accessor: 'status',
+        Cell: (instance) => {        
+          return <ObjectStatus showDefaultIcon state={instance.cell.value}>{statusObject[instance.cell.value]}</ObjectStatus>
+        }
       },
       {
         Header: 'Category',
-        accessor: 'pillar'
+        accessor: 'pillar',
       },
       {
         Header: 'Progress',
         accessor: 'progress',
+        width:300,
         Cell: (instance) => { 
             return <ProgressIndicator value={instance.cell.value}/> 
         }
@@ -39,6 +57,7 @@ const Analystics = (tableData) => {
       //       }
       //   }
     ]}
+    scaleWidthMode='Smart'
     data={tableData.data}
     filterable
     rowHeight={44}
