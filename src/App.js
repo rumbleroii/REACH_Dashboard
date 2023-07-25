@@ -52,7 +52,7 @@ function App() {
         <Route
           path="/event-details/:eventId"
           element={<EventDetails events={events} />}
-        />{" "}
+        />
       </Routes>
       <Footer />
     </>
