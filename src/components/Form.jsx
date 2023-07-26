@@ -28,8 +28,8 @@ import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 import "./Form.css";
 
 const FormPage = ({addEvent}) => {
-  const { eventId } = useParams(); // Get the eventId from the URL parameter
-  const location = useLocation(); // Get the location object
+  const { eventId } = useParams();
+  const location = useLocation();
 
   const [open, setOpen] = useState(false);
   const [formErrors, setFormErrors] = useState({});
@@ -73,8 +73,9 @@ const FormPage = ({addEvent}) => {
     event.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
-
+      
       const newEvent = {
+        
         eventName: formData.eventName,
         online: formData.online,
         link: formData.link,
@@ -92,7 +93,9 @@ const FormPage = ({addEvent}) => {
         institutions: formData.institutions,
       };
 
-      console.log(formData.eventType);
+      if(formData.id) {
+        newEvent.id = formData.id;
+      } 
 
       // Axios post
       axios.post("http://localhost:4000/create", newEvent)
@@ -178,6 +181,7 @@ const FormPage = ({addEvent}) => {
         const response = await axios.get(`http://localhost:4000/${eventId}`);
         const eventData = response.data.data[0];
         setFormData({
+          id: eventData.id,
           eventName: eventData.eventName,
           online: eventData.online,
           link: eventData.link,
