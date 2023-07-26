@@ -24,15 +24,15 @@ const Home = () => {
 
   // Fetch All Data
   useEffect(() => {
-    try {
-      axios.get("http://localhost:4000/all")
-      .then((res) => {
-        setAllData(res.data.data);
-        setData(res.data.data);
-      })
-    } catch (err) {
+    axios.get("http://localhost:4000/all")
+    .then((res) => {
+      setAllData(res.data.data);
+      setData(res.data.data);
+    })
+    .catch((err) => {
+      setAllData([]);
       console.log(err);
-    }
+    })
   }, [])
 
   const handleDateSelect = (event) => {
