@@ -138,8 +138,8 @@ const FormPage = ({addEvent}) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       online: onlineValue,
-      link: onlineValue ? prevFormData.link : "", // Set link if online, otherwise clear it
-      venue: onlineValue ? "" : prevFormData.venue, // Set venue if not online, otherwise clear it
+      link: onlineValue ? prevFormData.link : "", 
+      venue: onlineValue ? "" : prevFormData.venue, 
     }));
   };
 
@@ -196,15 +196,15 @@ const FormPage = ({addEvent}) => {
           porName: eventData.porName,
           porEmail: eventData.porEmail,
           progress: eventData.progress,
-          institutions: eventData.institutions || [], // In case institutions is null
+          institutions: eventData.institutions || [], 
         });
       } catch (error) {
         console.error("Error fetching event data:", error);
-        // Handle error if needed
+        
       }
     };
 
-    // Fetch event details only if the location pathname contains 'edit'
+    
     if (location.pathname.includes("edit")) {
       getEventDetails();
     }
