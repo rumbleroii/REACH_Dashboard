@@ -28,10 +28,11 @@ import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 import "./Form.css";
 
 const FormPage = ({addEvent}) => {
-  const { eventId } = useParams(); // Get the eventId from the URL parameter
-  const location = useLocation(); // Get the location object
+  const { eventId } = useParams();
+  const location = useLocation();
 
   const [open, setOpen] = useState(false);
+  const [online, setOnline] = useState(0);
   const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
     eventName: "",
@@ -73,7 +74,7 @@ const FormPage = ({addEvent}) => {
     event.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length === 0) {
-
+      
       const newEvent = {
         eventName: formData.eventName,
         online: formData.online,
@@ -92,7 +93,9 @@ const FormPage = ({addEvent}) => {
         institutions: formData.institutions,
       };
 
-      console.log(formData.eventType);
+      if(formData.id) {
+        newEvent.id = formData.id;
+      } 
 
       // Axios post
       axios.post("http://localhost:4000/create", newEvent)
@@ -131,13 +134,17 @@ const FormPage = ({addEvent}) => {
   };
 
   const handleOnlineChange = (event) => {
-    const onlineValue = event.target.checked;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      online: onlineValue,
-      link: onlineValue ? prevFormData.link : "", // Set link if online, otherwise clear it
-      venue: onlineValue ? "" : prevFormData.venue, // Set venue if not online, otherwise clear it
-    }));
+    const onlineValue = event.detail.selectedOption.value;
+    if(onlineValue == "Online") {
+      setOnline(0);
+    }
+    if(onlineValue == "Offline") {
+      setOnline(1);
+    }
+    if(onlineValue == "Hybrid") {
+      setOnline(2);
+    }
+    console.log(onlineValue);
   };
 
   const validateForm = () => {
@@ -178,6 +185,7 @@ const FormPage = ({addEvent}) => {
         const response = await axios.get(`http://localhost:4000/${eventId}`);
         const eventData = response.data.data[0];
         setFormData({
+          id: eventData.id,
           eventName: eventData.eventName,
           online: eventData.online,
           link: eventData.link,
@@ -236,45 +244,6 @@ const FormPage = ({addEvent}) => {
               <div className="form-error">{formErrors.eventName}</div>
             )}
           </FormItem>
-          <FormItem label="Online">
-            <CheckBox
-              name="online"
-              checked={formData.online}
-              onChange={handleOnlineChange}
-            />
-          </FormItem>
-          {formData.online ? (
-            <FormItem label="Link">
-              <Input
-                name="link"
-                value={formData.link}
-                onChange={handleInputChange}
-                placeholder="Enter the Link"
-              />
-              {formErrors.link && (
-                <div className="form-error">{formErrors.link}</div>
-              )}
-            </FormItem>
-          ) : (
-            <FormItem
-              label={
-                <Label>
-                  Venue <i></i>
-                </Label>
-              }
-            >
-              <Input
-                name="venue"
-                value={formData.venue}
-                onChange={handleInputChange}
-                placeholder="Enter the Venue"
-              />
-              {formErrors.venue && (
-                <div className="form-error">{formErrors.venue}</div>
-              )}
-            </FormItem>
-          )}
-
           <FormItem label="Event Type">
             <Select
               name="eventType"
@@ -365,6 +334,80 @@ const FormPage = ({addEvent}) => {
               <div className="form-error">{formErrors.status}</div>
             )}
           </FormItem>
+          <FormItem label="Event Type">
+            <Select
+              name="online"
+              value={formData.eventType}
+              onChange={handleOnlineChange}
+            >
+              <Option value="Online">Online</Option>
+              <Option value="Offline">Offline</Option>
+              <Option value="Hybrid">Hybrid</Option>
+            </Select>
+            {formErrors.eventType && (
+              <div className="form-error">{formErrors.eventType}</div>
+            )}
+          </FormItem>
+          {online === 0 ? (
+              <FormItem label="Link">
+                <Input
+                  name="link"
+                  value={formData.link}
+                  onChange={handleInputChange}
+                  placeholder="Enter link"
+                />
+                {formErrors.eventName && (
+                  <div className="form-error">{formErrors.eventName}</div>
+                )}
+              </FormItem>
+          ) : (
+            <div></div>
+          )}
+
+          {online === 1 ? (
+              <FormItem label="Venue ">
+                <Input
+                  name="Venue"
+                  value={formData.venue}
+                  onChange={handleInputChange}
+                  placeholder="Enter venue name"
+                />
+                {formErrors.eventName && (
+                  <div className="form-error">{formErrors.eventName}</div>
+                )}
+              </FormItem>
+          ) : (
+            <div></div>
+          )}
+
+          {online === 2 ? (
+              <>
+                <FormItem label="Link">
+                  <Input
+                    name="link"
+                    value={formData.link}
+                    onChange={handleInputChange}
+                    placeholder="Enter Link"
+                  />
+                  {formErrors.eventName && (
+                    <div className="form-error">{formErrors.eventName}</div>
+                  )}
+                </FormItem>
+                <FormItem label="Venue ">
+                  <Input
+                    name="Venue"
+                    value={formData.venue}
+                    onChange={handleInputChange}
+                    placeholder="Enter venue name"
+                  />
+                  {formErrors.eventName && (
+                    <div className="form-error">{formErrors.eventName}</div>
+                  )}
+                </FormItem>
+              </>
+          ) : (
+            <div></div>
+          )}
         </FormGroup>
         
         <FormGroup titleText="Point Of Responsibility Data">
