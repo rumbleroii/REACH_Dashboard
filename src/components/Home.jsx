@@ -32,7 +32,7 @@ const Home = () => {
     .catch((err) => {
       setAllData([]);
       console.log(err);
-    })
+      })
   }, [])
 
   const handleDateSelect = (event) => {
