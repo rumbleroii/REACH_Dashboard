@@ -20,7 +20,6 @@ const EventDetails = () => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [dialog, setDialog] = useState(false);
   // Use the useNavigate hook to get the navigation function
   const navigate = useNavigate();
 
@@ -46,7 +45,7 @@ const EventDetails = () => {
     };
 
     getEventData();
-  }, []);
+  }, [eventId]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -120,89 +119,119 @@ const EventDetails = () => {
         <div>Event not found</div>
       ) : (
         <>
-          <p className="event-details-header">Event Details</p>
-          <div className="event-details-field">
-            <div className="event-details-label">Event Title:</div>
-            <div className="event-details-value">{event.eventName}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Event ID:</div>
-            <div className="event-details-value">{event.id}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Status:</div>
-            <div className="event-details-value">
-              <span className={`event-details-status`}>{event.status}</span>
-            </div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Category:</div>
-            <div className="event-details-value">{event.eventType}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Progress:</div>
-            <div className="event-details-value">
-              <ProgressIndicator
-                value={event.progress / 100}
-                displayValue={`${event.progress}%`}
-                className="event-details-progress"
-              >
-                <div
-                  className="event-details-progress-value"
-                  style={{ width: `${event.progress}%` }}
-                />
-              </ProgressIndicator>
-            </div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Start Date:</div>
-            <div className="event-details-value">{event.startDate}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Start Time:</div>
-            <div className="event-details-value">{event.startTime}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">End Date:</div>
-            <div className="event-details-value">{event.endDate}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">End Time:</div>
-            <div className="event-details-value">{event.endTime}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">Event Description:</div>
-            <div className="event-details-value">{event.eventDescription}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">POR Name:</div>
-            <div className="event-details-value">{event.porName}</div>
-          </div>
-          <div className="event-details-field">
-            <div className="event-details-label">POR E-mail ID:</div>
-            <div className="event-details-value">{event.porEmail}</div>
-          </div>
-          {event.institutions && (
+          <div className="ed">
+            <p className="event-details-header">Event Details</p>
             <div className="event-details-field">
-              <div className="event-details-label">Institutions:</div>
+              <Text className="event-details-label">Event Title:</Text>
+              <Text className="event-details-value">{event.eventName}</Text>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">Event ID:</Text>
+              <Text className="event-details-value">{event.id}</Text>
+            </div>
+
+            <div className="event-details-field">
+              <Text className="event-details-label">Category:</Text>
+              <Text className="event-details-value">{event.eventType}</Text>
+            </div>
+
+            <div className="event-details-field">
+              <Text className="event-details-label">Start Date:</Text>
+              <Text className="event-details-value">{event.startDate}</Text>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">Start Time:</Text>
+              <Text className="event-details-value">{event.startTime}</Text>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">End Date:</Text>
+              <Text className="event-details-value">{event.endDate}</Text>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">End Time:</Text>
+              <Text className="event-details-value">{event.endTime}</Text>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">Event Description:</Text>
               <div className="event-details-value">
-                {event.institutions.join(", ")}
+                {event.eventDescription}
               </div>
             </div>
-          )}
-          <Button
-            style={{ width: "120px", margin: "10px" }}
-            onClick={handleEdit}
+          </div>
+
+          <div className="status-por">
+            <p className="status-header">Status</p>
+            <div className="event-details-field">
+              <Text className="event-details-label">Status:</Text>
+              <div className="event-details-value">
+                <span className={`event-details-status`}>{event.status}</span>
+              </div>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">Progress:</Text>
+              <Text className="event-details-value">
+                <ProgressIndicator
+                  style={{
+                    width: "50%",
+                  }}
+                  value={event.progress / 100}
+                  displayValue={`${event.progress}%`}
+                  className="event-details-progress"
+                >
+                  <div
+                    className="event-details-progress-value"
+                    style={{ width: `${event.progress}%` }}
+                  />
+                </ProgressIndicator>
+              </Text>
+            </div>
+
+            <p className="por-header">Person of the Responsibility Details</p>
+            <div className="event-details-field">
+              <Text className="event-details-label">Name:</Text>
+              <Text className="event-details-value">{event.porName}</Text>
+            </div>
+            <div className="event-details-field">
+              <Text className="event-details-label">E-mail:</Text>
+              <Text className="event-details-value">{event.porEmail}</Text>
+            </div>
+            {event.institutions && (
+              <div className="event-details-field">
+                <Text className="event-details-label">Institutions:</Text>
+                <Text className="event-details-value">
+                  {event.institutions.join(", ")}
+                </Text>
+              </div>
+            )}
+          </div>
+          <div
+            className="buttons-container"
+            style={{
+              position: "absolute",
+              bottom: "20px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              margin: "40px",
+              gap: "30px",
+            }}
           >
-            Edit
-          </Button>
-          <Button
-            style={{ width: "120px", margin: "30px" }}
-            design="Emphasized"
-            onClick={handleSubmit}
-          >
-            Delete Event
-          </Button>
+         <div style={{justifyContent: 'center',
+  alignItems: 'center', marginLeft:'-62px'}}>
+              <Button style={{ width: "120px", margin:'20px',marginBottom:'0px'}} onClick={handleEdit}>
+                Edit
+              </Button>
+              <Button
+                style={{ width: "120px", backgroundColor: "#ff5c33", margin:'20px',marginBottom:'0px' }}
+                design="Emphasized"
+                onClick={handleSubmit}
+              >
+                Delete Event
+              </Button>
+         </div>
+          </div>
         </>
       )}
     </div>
