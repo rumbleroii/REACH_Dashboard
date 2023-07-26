@@ -4,23 +4,14 @@ import { FlexBox, Card, Text, FlexBoxJustifyContent, FlexBoxAlignItems } from '@
 const Mou = () => {
   const imageStyle = { width: '200px', height: '150px', marginRight: '10px', marginLeft: '50px'};
 
-  const containerStyle = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: '40px', // Gap between FlexBoxes (horizontal and vertical)
-    justifyContent: 'center', // To horizontally center FlexBoxes within the container
-    marginBottom:'60px'
-  };
-
   const cardStyle = {
-    width: '350px',
+    width:"20%",
     padding: '20px',
     border: '1px solid #ccc',
     borderRadius: '10px',
     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
     backgroundColor: '#f5f5f5',
-    marginTop: '20px',
-    transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out',
+    transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out'
   };
 
   const flexBoxStyle = {
@@ -40,32 +31,31 @@ const Mou = () => {
   };
 
   return (
-    <div style={containerStyle}>
-       <FlexBox style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '50px' ,width:'100%'}}>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
-            <Text style={{ textAlign: 'center' }}>
-              <h2>Signed MOU'S</h2>
-              <h4>blah blah</h4>
-            </Text>
-          </div>
-        </FlexBox>
-        
-      <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
+    <FlexBox style={{ flexWrap: "wrap", gap: "40px",  margin: "30px", marginBottom: "50px" }} justifyContent={FlexBoxJustifyContent.Center} >
+      <FlexBox style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', width: '100%' }}>
+        <Text style={{ fontSize: "18px", textAlign: 'center' }}>
+          Signed MOU'S
+        </Text>
+      </FlexBox>
       
+      <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
+        <div style={{ margin:"50px auto"}}>
           <span>
             <img
               alt="img-sample 1"
               src="https://tse3.mm.bing.net/th?id=OIP.LfsPkr9RbTuTXaIPWhb6pQAAAA&pid=Api"
-              style={{width:'100%', marginTop:'50px'}}
+              style={{ width:'100%' }}
             />
           </span>
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+          <p>lol</p>
+        </div>
       </Card>
+
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-       
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 2"
@@ -76,24 +66,24 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}> 
           <span>
             <img
               alt="img-sample 3"
               src="https://tse1.mm.bing.net/th?id=OIP.ZBqTvN-01CEMWxOItPYhhAHaDX&pid=Api"
-              style={{width:'99%', marginTop:'40px'}}
+              style={{width:'100%', marginTop:'40px'}}
             />
           </span>
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 4"
@@ -104,10 +94,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 5"
@@ -118,24 +108,24 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 6"
               src="https://tse2.mm.bing.net/th?id=OIP.J5XWjH-_RzC5fxqzi-NwrQHaB1&pid=Api"
-              style={{width:'98%', marginTop:'40px',marginLeft:'1px'}}
+              style={{width:'100%', marginTop:'40px',marginLeft:'1px'}}
             />
           </span>
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 7"
@@ -146,10 +136,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 8"
@@ -160,11 +150,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+        <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 9"
@@ -175,10 +164,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 10"
@@ -189,10 +178,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 11"
@@ -203,11 +192,11 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
 
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 12"
@@ -218,10 +207,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+      </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 13"
@@ -232,10 +221,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 14"
@@ -246,10 +235,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 15"
@@ -260,10 +249,10 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+      </div>
       </Card>
       <Card style={cardStyle} onMouseEnter={handleCardHover} onMouseLeave={handleCardLeave}>
-      
+      <div style={{ width:"350px", margin:"0 auto"}}>
           <span>
             <img
               alt="img-sample 16"
@@ -274,11 +263,11 @@ const Mou = () => {
           <span>
             <p>Text for Image 2</p>
           </span>
-      
+        </div>
       </Card>
 
       {/* Add more Cards with FlexBoxes as needed... */}
-    </div>
+    </FlexBox>
   );
 };
 

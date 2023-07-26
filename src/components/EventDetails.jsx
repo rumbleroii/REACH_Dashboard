@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ProgressIndicator, ObjectStatus } from '@ui5/webcomponents-react';
+import { ProgressIndicator, ObjectStatus, Button, MessageBox} from '@ui5/webcomponents-react';
+
+import axios from 'axios';
+
 // Import the CSS file for your custom styles
 import './EventDetails.css';
 
@@ -9,27 +12,23 @@ const EventDetails = () => {
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [open, setOpen] = useState(false);
 
-  // Update this dummyData object with your desired fields
-  const dummyData = {
-    eventId: '1a2b3c4d',
-    eventName: 'Dummy Event',
-    status: 'Success',
-    progress: 60,
-    pillar: 'Research',
-    startDate: '2023-07-19',
-    deadline: '2023-12-31',
-    // Add other fields as needed...
-  };
 
   useEffect(() => {
     const getEventData = async () => {
       try {
         // Simulate API call and set dummy data
-        await new Promise((resolve) => setTimeout(resolve, 1000));
-        setEvent(dummyData);
-        setLoading(false);
-        setError(null);
+        await axios.get(`http://localhost:4000/${eventId}`)
+        .then((res) => {
+          setEvent(res.data.data[0]);
+          setLoading(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setError(err);
+        })
+
       } catch (error) {
         console.error('Error fetching event data:', error);
         setLoading(false);
@@ -52,6 +51,18 @@ const EventDetails = () => {
     return <div>Event not found</div>;
   }
 
+
+  const handleSubmit = async () => {
+    await axios.delete(`http://localhost:4000/delete/${eventId}`)
+    .then((res) => {
+      setOpen(true);
+      setEvent(null);
+    })
+    .catch((res) => {
+      console.log(res);
+    })
+  }
+
   return (
     <div className="event-details-container">
       {loading ? (
@@ -64,12 +75,12 @@ const EventDetails = () => {
         <>
           <h2 className="event-details-header">Event Details</h2>
           <div className="event-details-field">
-            <div className="event-details-label">Event ID:</div>
-            <div className="event-details-value">{event.eventId}</div>
+            <div className="event-details-label">Event Title:</div>
+            <div className="event-details-value">{event.eventName}</div>
           </div>
           <div className="event-details-field">
-            <div className="event-details-label">Deadline:</div>
-            <div className="event-details-value">{event.deadline}</div>
+            <div className="event-details-label">Event ID:</div>
+            <div className="event-details-value">{event.id}</div>
           </div>
           <div className="event-details-field">
             <div className="event-details-label">Status:</div>
@@ -79,7 +90,7 @@ const EventDetails = () => {
           </div>
           <div className="event-details-field">
             <div className="event-details-label">Category:</div>
-            <div className="event-details-value">{event.pillar}</div>
+            <div className="event-details-value">{event.eventType}</div>
           </div>
           <div className="event-details-field">
             <div className="event-details-label">Progress:</div>
@@ -132,6 +143,19 @@ const EventDetails = () => {
               </div>
             </div>
           )}
+          <Button style={{ width:"120px", margin:"30px"}} design="Emphasized" onClick={handleSubmit}>Delete Event</Button>
+          {open && (<MessageBox
+            onAfterOpen={function ka(){}}
+            onBeforeClose={function ka(){}}
+            onBeforeOpen={function ka(){}}
+            onClose={function ka(){
+              setOpen(false);
+            }}
+            open
+            type="Submit"
+          >
+            Event Deleted!
+          </MessageBox>)}
         </>
       )}
     </div>
