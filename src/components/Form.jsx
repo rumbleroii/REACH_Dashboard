@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import axios from "axios";
 
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
@@ -27,9 +27,9 @@ import {
 
 import "./Form.css";
 
-const FormPage = ({addEvent,location}) => {
-  // Get the eventId from the URL parameter
-  const { eventId } = useParams();
+const FormPage = ({addEvent}) => {
+  const { eventId } = useParams(); // Get the eventId from the URL parameter
+  const location = useLocation(); // Get the location object
 
   const [formData, setFormData] = useState({
     eventName: "",
