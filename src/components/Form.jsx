@@ -6,7 +6,6 @@ import axios from "axios";
 import {
   Form,
   FormGroup,
-  CheckBox,
   Select,
   Option,
   FormItem,
@@ -30,8 +29,9 @@ import "./Form.css";
 const FormPage = ({addEvent}) => {
   const { eventId } = useParams();
   const location = useLocation();
-
+  const [porNames, setPorNames] = useState([]);
   const [open, setOpen] = useState(false);
+  const [online, setOnline] = useState(0);
   const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
     eventName: "",
@@ -46,11 +46,33 @@ const FormPage = ({addEvent}) => {
     status: "Success",
     progress: 0,
     eventDescription: "",
-    porName: "",
+    porNames: "",
     porEmail: "",
     institutions: [],
+    
   });
   
+
+  const handleAddPorName = () => {
+    setPorNames((prevPorNames) => [...prevPorNames, ""]);
+  };
+
+  // Function to remove the last POR name field
+  const handleRemovePorName = () => {
+    if (porNames.length > 1) {
+      setPorNames((prevPorNames) => prevPorNames.slice(0, prevPorNames.length - 1));
+    }
+  };
+
+  // Function to update the POR name based on the input index
+  const handlePorNameChange = (event, index) => {
+    const { value } = event.target;
+    setPorNames((prevPorNames) => {
+      const newPorNames = [...prevPorNames];
+      newPorNames[index] = value;
+      return newPorNames;
+    });
+  };
   const handleInputChange = (event) => {
     let { name, value } = event.target;
     if(name === "eventType") value = event.detail.selectedOption.value;
@@ -75,7 +97,6 @@ const FormPage = ({addEvent}) => {
     if (Object.keys(errors).length === 0) {
       
       const newEvent = {
-        
         eventName: formData.eventName,
         online: formData.online,
         link: formData.link,
@@ -134,13 +155,17 @@ const FormPage = ({addEvent}) => {
   };
 
   const handleOnlineChange = (event) => {
-    const onlineValue = event.target.checked;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      online: onlineValue,
-      link: onlineValue ? prevFormData.link : "", 
-      venue: onlineValue ? "" : prevFormData.venue, 
-    }));
+    const onlineValue = event.detail.selectedOption.value;
+    if(onlineValue === "Online") {
+      setOnline(0);
+    }
+    if(onlineValue === "Offline") {
+      setOnline(1);
+    }
+    if(onlineValue === "Hybrid") {
+      setOnline(2);
+    }
+    console.log(onlineValue);
   };
 
   const validateForm = () => {
@@ -240,45 +265,6 @@ const FormPage = ({addEvent}) => {
               <div className="form-error">{formErrors.eventName}</div>
             )}
           </FormItem>
-          <FormItem label="Online">
-            <CheckBox
-              name="online"
-              checked={formData.online}
-              onChange={handleOnlineChange}
-            />
-          </FormItem>
-          {formData.online ? (
-            <FormItem label="Link">
-              <Input
-                name="link"
-                value={formData.link}
-                onChange={handleInputChange}
-                placeholder="Enter the Link"
-              />
-              {formErrors.link && (
-                <div className="form-error">{formErrors.link}</div>
-              )}
-            </FormItem>
-          ) : (
-            <FormItem
-              label={
-                <Label>
-                  Venue <i></i>
-                </Label>
-              }
-            >
-              <Input
-                name="venue"
-                value={formData.venue}
-                onChange={handleInputChange}
-                placeholder="Enter the Venue"
-              />
-              {formErrors.venue && (
-                <div className="form-error">{formErrors.venue}</div>
-              )}
-            </FormItem>
-          )}
-
           <FormItem label="Event Type">
             <Select
               name="eventType"
@@ -354,6 +340,84 @@ const FormPage = ({addEvent}) => {
               rows={5}
             />
           </FormItem>
+          
+        </FormGroup>
+
+        <FormGroup>
+          <FormItem label="Event Type">
+            <Select
+              name="online"
+              value={formData.eventType}
+              onChange={handleOnlineChange}
+            >
+              <Option value="Online">Online</Option>
+              <Option value="Offline">Offline</Option>
+              <Option value="Hybrid">Hybrid</Option>
+            </Select>
+            {formErrors.eventType && (
+              <div className="form-error">{formErrors.eventType}</div>
+            )}
+          </FormItem>
+          {online === 0 ? (
+              <FormItem label="Link">
+                <Input
+                  name="link"
+                  value={formData.link}
+                  onChange={handleInputChange}
+                  placeholder="Enter link"
+                />
+                {formErrors.eventName && (
+                  <div className="form-error">{formErrors.eventName}</div>
+                )}
+              </FormItem>
+          ) : (
+            <div></div>
+          )}
+
+          {online === 1 ? (
+              <FormItem label="Venue ">
+                <Input
+                  name="Venue"
+                  value={formData.venue}
+                  onChange={handleInputChange}
+                  placeholder="Enter venue name"
+                />
+                {formErrors.eventName && (
+                  <div className="form-error">{formErrors.eventName}</div>
+                )}
+              </FormItem>
+          ) : (
+            <div></div>
+          )}
+
+          {online === 2 ? (
+              <>
+                <FormItem label="Link">
+                  <Input
+                    name="link"
+                    value={formData.link}
+                    onChange={handleInputChange}
+                    placeholder="Enter Link"
+                  />
+                  {formErrors.eventName && (
+                    <div className="form-error">{formErrors.eventName}</div>
+                  )}
+                </FormItem>
+                <FormItem label="Venue ">
+                  <Input
+                    name="Venue"
+                    value={formData.venue}
+                    onChange={handleInputChange}
+                    placeholder="Enter venue name"
+                  />
+                  {formErrors.eventName && (
+                    <div className="form-error">{formErrors.eventName}</div>
+                  )}
+                </FormItem>
+              </>
+          ) : (
+            <div></div>
+          )}
           <FormItem label="Event Status">
             <Select
               name="status"
@@ -369,20 +433,30 @@ const FormPage = ({addEvent}) => {
               <div className="form-error">{formErrors.status}</div>
             )}
           </FormItem>
-        </FormGroup>
+          </FormGroup>
         
         <FormGroup titleText="Point Of Responsibility Data">
-          <FormItem label="POR Name">
-            <Input
-              name="porName"
-              value={formData.porName}
-              onChange={handleInputChange}
-              placeholder="Enter POR name"
-            />
-            {formErrors.porName && (
-              <div className="form-error">{formErrors.porName}</div>
-            )}
-          </FormItem>
+           <div>
+    {porNames.map((porName, index) => (
+      <div key={index}>
+        <FormItem label={`POR Name ${index + 1}`}>
+          <Input
+            name={`porName${index}`}
+            value={porName}
+            onChange={(event) => handlePorNameChange(event, index)}
+            placeholder="Enter POR name"
+          />
+        </FormItem>
+        {index === porNames.length - 1 && (
+          // Only show remove button for the last POR name field
+          <Button onClick={handleRemovePorName}>Remove</Button>
+        )}
+        <div style={{ height: "10px" }} /> {/* Add some spacing between each POR name field */}
+      </div>
+    ))}
+    {/* Plus button to add more POR name fields */}
+    <Button onClick={handleAddPorName}>Add POR Name</Button>
+  </div>
           <FormItem label="POR E-mail ID">
             <Input
               name="porEmail"
