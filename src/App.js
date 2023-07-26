@@ -48,6 +48,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/mou" element={<Mou />} />
         <Route path="/create-event" element={<Form addEvent={addEvent} />} />
+        <Route path="/edit/:eventId" element={<Form />} />
         <Route path="/" element={<Home events={events} />} />
         <Route
           path="/event-details/:eventId"

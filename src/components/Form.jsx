@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
@@ -27,7 +27,9 @@ import {
 
 import "./Form.css";
 
-const FormPage = ({addEvent}) => {
+const FormPage = ({addEvent,location}) => {
+  // Get the eventId from the URL parameter
+  const { eventId } = useParams();
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -170,6 +172,40 @@ const FormPage = ({addEvent}) => {
     }
     return errors;
   };
+
+  useEffect(() => {
+    const getEventDetails = async () => {
+      try {
+        const response = await axios.get(`http://localhost:4000/${eventId}`);
+        const eventData = response.data.data[0];
+        setFormData({
+          eventName: eventData.eventName,
+          online: eventData.online,
+          link: eventData.link,
+          venue: eventData.venue,
+          eventType: eventData.eventType,
+          startDate: eventData.startDate,
+          startTime: eventData.startTime,
+          endDate: eventData.endDate,
+          endTime: eventData.endTime,
+          eventDescription: eventData.eventDescription,
+          status: eventData.status,
+          porName: eventData.porName,
+          porEmail: eventData.porEmail,
+          progress: eventData.progress,
+          institutions: eventData.institutions || [], // In case institutions is null
+        });
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+        // Handle error if needed
+      }
+    };
+
+    // Fetch event details only if the location pathname contains 'edit'
+    if (location.pathname.includes("edit")) {
+      getEventDetails();
+    }
+  }, [eventId, location.pathname]);
 
   const [open, setOpen] = useState(false);
 
