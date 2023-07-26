@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Calendar,
   Card,
@@ -10,27 +10,30 @@ import {
   Text,
 } from "@ui5/webcomponents-react";
 
-import { Link } from "react-router-dom"; // Step 1: Import Link
+import { Link } from "react-router-dom"; 
+import axios from "axios";
 
 import Analystics from "./Analystics";
-
 import "./Home.css";
-import data from "./data.json";
-import { sapUiLargeMarginBottom } from "@ui5/webcomponents-react-base/dist/styling/spacing";
 
 const Home = () => {
+  const [data, setAllData] = useState([]);
+  const [updatedData, setData] = useState([]);
   const [selectedDate, setSelectedDate] = useState("All Events");
   const [emphasizedButton, setEmphasizedButton] = useState(null);
-  const [updatedData, setData] = useState(data);
 
-  // useEffect(() => {
-  //   const currentDate = new Date().toDateString();
-  //   const dateObj = currentDate.split(' ');
-
-  //   const modifiedDate = dateObj[2] + " " + dateObj[1] + ", " + dateObj[3];
-  //   console.log(modifiedDate);
-  //   setSelectedDate(modifiedDate);
-  // }, []);
+  // Fetch All Data
+  useEffect(() => {
+    try {
+      axios.get("http://localhost:4000/all")
+      .then((res) => {
+        setAllData(res.data.data);
+        setData(res.data.data);
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  }, [])
 
   const handleDateSelect = (event) => {
     setSelectedDate(event.detail.values[0]);
@@ -52,6 +55,7 @@ const Home = () => {
     setEmphasizedButton(null);
     setSelectedDate("All Events");
   };
+
   const handleButtonClick = (buttonName) => {
     setEmphasizedButton((prevButton) => {
       if (prevButton === buttonName && selectedDate === "All Events") {
@@ -76,11 +80,7 @@ const Home = () => {
     });
   };
 
-  // Function to add a new event to the state
-  const addEvent = (eventData) => {
-    setData([...updatedData, eventData]);
-  };
-
+  // CSS
   const buttonStyle = {
     width: "170px",
     height: "46px",
@@ -128,33 +128,22 @@ const Home = () => {
         alignItems={FlexBoxAlignItems.Center}
         justifyContent={FlexBoxJustifyContent.Center}
         style={{
-          height: "60vh",
-          marginBottom: "80px",
-          marginTop: "35px",
-          marginLeft: "10px",
-          marginRight: "10px",
+          height: "75vh",
+          margin: "0 auto"
         }}
       >
         <FlexBox alignItems={FlexBoxAlignItems.Center} direction="Column">
-          <Text style={{ fontSize: "20px", margin: "10px", color:'grey' }}>
-            {" "}
-            Event Calender{" "}
-          </Text>
+          <Text style={{ fontSize: "20px", margin: "10px", color:'grey' }}> Event Calender </Text>
           <Calendar
             style={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}
             onSelectedDatesChange={handleDateSelect}
             primaryCalendarType="Gregorian"
-            children={(instance) => {
-              console.log(instance);
-            }}
+            hideWeekNumbers="true"
           >
-            lols
           </Calendar>
         </FlexBox>
 
-        <FlexBox
-          alignItems={FlexBoxAlignItems.Center}
-          style={{ width: "60%", marginLeft: "50px", display: "block" }}
+        <FlexBox alignItems={FlexBoxAlignItems.Center} justifyContent={FlexBoxJustifyContent.Center} style={{ width: "65%", marginLeft: "50px", display: "block" }}
         >
           <Link to="/create-event">
             <Button
@@ -180,7 +169,7 @@ const Home = () => {
               />
             }
           >
-            <Analystics tableData={{ data: updatedData }} /> {/* Pass updatedData as tableData prop */}
+            <Analystics tableData={{ data: updatedData }} />
           </Card>
         </FlexBox>
       </FlexBox>

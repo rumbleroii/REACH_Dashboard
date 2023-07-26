@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-
 import axios from "axios";
-
-import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 
 import {
   Form,
@@ -24,11 +21,13 @@ import {
   FlexBoxAlignItems,
   FlexBoxJustifyContent,
 } from "@ui5/webcomponents-react";
+import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 
 import "./Form.css";
 
 const FormPage = ({addEvent}) => {
-
+  const [open, setOpen] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
   const [formData, setFormData] = useState({
     eventName: "",
     online: false,
@@ -46,9 +45,7 @@ const FormPage = ({addEvent}) => {
     porEmail: "",
     institutions: [],
   });
-
-  const [formErrors, setFormErrors] = useState({});
-
+  
   const handleInputChange = (event) => {
     let { name, value } = event.target;
     if(name === "eventType") value = event.detail.selectedOption.value;
@@ -66,7 +63,6 @@ const FormPage = ({addEvent}) => {
       institutions: event.detail.selectedItems.map((item) => item.text),
     }));
   };
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -170,8 +166,6 @@ const FormPage = ({addEvent}) => {
     }
     return errors;
   };
-
-  const [open, setOpen] = useState(false);
 
   return (
     <div style={{ margin: "30px", marginBottom: "40px" }}>
