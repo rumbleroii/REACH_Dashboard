@@ -18,7 +18,7 @@ const Analystics = ({ tableData }) => {
         {
           Header: 'Event Title',
           accessor: 'eventName',
-          minWidth: 200,
+          minWidth: 170,
           Cell: (instance) => (
             <Link to={`/event-details/${instance.row.original.id}`}> 
               {instance.cell.value}
@@ -51,7 +51,7 @@ const Analystics = ({ tableData }) => {
         {
           Header: 'Progress',
           accessor: 'progress',
-          width: 300,
+          minWidth: 250,
           Cell: (instance) => {
             return <ProgressIndicator value={instance.cell.value} />;
           },
