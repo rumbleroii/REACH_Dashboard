@@ -23,15 +23,11 @@ import {
   FlexBox,
   FlexBoxAlignItems,
   FlexBoxJustifyContent,
-  Dialog,
-  Bar
 } from "@ui5/webcomponents-react";
 
 import "./Form.css";
-import { Navigate, useNavigate } from "react-router-dom";
 
 const FormPage = ({addEvent}) => {
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     eventName: "",
@@ -57,7 +53,7 @@ const FormPage = ({addEvent}) => {
     let { name, value } = event.target;
     if(name === "eventType") value = event.detail.selectedOption.value;
     if(name === "status") value = event.detail.selectedOption.value;
-    console.log(value);
+    console.log(name, value);
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value
@@ -176,14 +172,6 @@ const FormPage = ({addEvent}) => {
   };
 
   const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  }
-
-  const handleClose = () => {
-    setOpen(false);
-  }
 
   return (
     <div style={{ margin: "30px", marginBottom: "40px" }}>

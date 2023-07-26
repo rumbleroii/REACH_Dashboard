@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ProgressIndicator, ObjectStatus, Button, MessageBox} from '@ui5/webcomponents-react';
+import { ProgressIndicator, ObjectStatus, Button, MessageBox, Text} from '@ui5/webcomponents-react';
 
 import axios from 'axios';
 
@@ -9,11 +9,11 @@ import './EventDetails.css';
 
 const EventDetails = () => {
   const { eventId } = useParams();
+
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [open, setOpen] = useState(false);
-
+  const [dialog, setDialog] = useState(false);
 
   useEffect(() => {
     const getEventData = async () => {
@@ -47,21 +47,43 @@ const EventDetails = () => {
     return <div>{error}</div>;
   }
 
-  if (!event) {
-    return <div>Event not found</div>;
+  if(!event) {
+    return (
+      <>
+        <MessageBox
+          onAfterOpen={function ka(){}}
+          onBeforeClose={function ka(){}}
+          onBeforeOpen={function ka(){}}
+          onClose={function ka(){
+            setEvent("Event Not Found");
+          }}
+          open
+          type="Submit"
+        >
+          Event Deleted!
+        </MessageBox>
+      </>
+    )
   }
-
+  
+  if(event === "Event Not Found") {
+    return (
+      <Text style = {{ display:"flex", justifyContent: "center", fontSize: "20px", margin: "20px" }}>Event Deleted</Text>
+    )
+  }
 
   const handleSubmit = async () => {
     await axios.delete(`http://localhost:4000/delete/${eventId}`)
     .then((res) => {
-      setOpen(true);
-      setEvent(null);
+      console.log("POSTED");
     })
     .catch((res) => {
       console.log(res);
     })
+
+    setEvent(null);;
   }
+
 
   return (
     <div className="event-details-container">
@@ -73,7 +95,7 @@ const EventDetails = () => {
         <div>Event not found</div>
       ) : (
         <>
-          <h2 className="event-details-header">Event Details</h2>
+          <p className="event-details-header">Event Details</p>
           <div className="event-details-field">
             <div className="event-details-label">Event Title:</div>
             <div className="event-details-value">{event.eventName}</div>
@@ -144,18 +166,6 @@ const EventDetails = () => {
             </div>
           )}
           <Button style={{ width:"120px", margin:"30px"}} design="Emphasized" onClick={handleSubmit}>Delete Event</Button>
-          {open && (<MessageBox
-            onAfterOpen={function ka(){}}
-            onBeforeClose={function ka(){}}
-            onBeforeOpen={function ka(){}}
-            onClose={function ka(){
-              setOpen(false);
-            }}
-            open
-            type="Submit"
-          >
-            Event Deleted!
-          </MessageBox>)}
         </>
       )}
     </div>

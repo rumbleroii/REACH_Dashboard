@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "eventName": "xvfsdf",
+    "online": false,
+    "link": "",
+    "venue": "sdfsdf",
+    "eventType": "Research",
+    "startDate": "Jul 6, 2023",
+    "startTime": "",
+    "endDate": "Jul 6, 2023",
+    "endTime": "",
+    "eventDescription": "sdfsf",
+    "status": "Success",
+    "progress": 0,
+    "porName": "sdfssd",
+    "porEmail": "sdfsd",
+    "institutions": [],
+    "id": "sddfsd"
+  }
+]
