@@ -7,6 +7,9 @@ import { Timeline, TimelineItem } from "@ui5/webcomponents-react";
 import { Icon } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/calendar";
 
+import "@ui5/webcomponents-icons/dist/in-progress";
+
+
 import {
   ProgressIndicator,
   Button,
@@ -250,7 +253,7 @@ const EventDetails = () => {
             <p className="timeline-header">Checkpoints</p>
             <Timeline layout="Horizontal">
               <TimelineItem
-                icon="calender"
+                icon="in-progress"
                 name="John Smith"
                 subtitleText="2019/01/01"
                 titleText="Schedule Call"
