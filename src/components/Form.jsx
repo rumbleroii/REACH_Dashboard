@@ -464,6 +464,30 @@ const FormPage = ({ addEvent }) => {
               <div className="form-error">{formErrors.porEmail}</div>
             )}
           </FormItem>
+           
+          {/*<FormItem label="Alternate Name">
+            <Input
+              style={{ margin: "5px" }}
+              name="porName"
+              value={formData.porName}
+              onChange={handleInputChange}
+              placeholder="Enter Alternate POR name"
+            />
+
+            
+          </FormItem>
+           <FormItem label="Alternate E-mail ID">
+            <Input
+              style={{ margin: "5px" }}
+              name="porEmail"
+              value={formData.porEmail}
+              onChange={handleInputChange}
+              placeholder="Enter email Id"
+            />
+
+           
+            </FormItem>
+            */}
 
           <FormItem label="Institutions">
             <MultiComboBox
@@ -475,11 +499,68 @@ const FormPage = ({ addEvent }) => {
               onSelectionChange={handleMultiComboBoxChange}
               placeholder="Select the Universities you want"
             >
-              <MultiComboBoxItem text="VJTI" />
-              <MultiComboBoxItem text="Cummins" />
-              <MultiComboBoxItem text="Amritha" />
-              <MultiComboBoxItem text="XXX" />
-              <MultiComboBoxItem text="YYY" />
+              <MultiComboBoxItem text="IIIT Banglore" />
+              <MultiComboBoxItem text="Cummins college of Engineering, Pune" />
+              <MultiComboBoxItem text="Amritha Viswa Vidhyapeetam" />
+              <MultiComboBoxItem text="VIT Bangalore" />
+              <MultiComboBoxItem text="RV Institutions" />
+              <MultiComboBoxItem text="National Institute of Design" />
+              <MultiComboBoxItem text="Dayananda Sagar University" />
+              <MultiComboBoxItem text="PES University" />
+              <MultiComboBoxItem text="New Horizon College of Engineering" />
+              <MultiComboBoxItem text="Ramiah University" />
+              <MultiComboBoxItem text="NIT Thirucharapally" />
+              <MultiComboBoxItem text="NIT Suratkal" />
+              <MultiComboBoxItem text="NIT Calicut" />
+              <MultiComboBoxItem text="NIT Warangal" />
+              <MultiComboBoxItem text="NIT Rourkela" />
+              <MultiComboBoxItem text="NIT Bhopal" />
+              <MultiComboBoxItem text="NIT Jalandhar" />
+              <MultiComboBoxItem text="NIT Surat" />
+              <MultiComboBoxItem text="NIT Silchar" />
+              <MultiComboBoxItem text="NIT Srinagar" />
+              <MultiComboBoxItem text="NIT Kurukshetra" />
+              <MultiComboBoxItem text="NIT Tadepalligudem" />
+              <MultiComboBoxItem text="NIT Patna" />
+              <MultiComboBoxItem text="NIT Raipur" />
+              <MultiComboBoxItem text="NIT Allahabad" />
+              <MultiComboBoxItem text="NIT Hamirpur" />
+              <MultiComboBoxItem text="NIT Durgapur" />
+              <MultiComboBoxItem text="NIT Goa" />
+              <MultiComboBoxItem text="NIT Nagpur" />
+              <MultiComboBoxItem text="NIT Jamshedpur" />
+              <MultiComboBoxItem text="NIT Jaipur" />
+              <MultiComboBoxItem text="NIT Manipur" />
+              <MultiComboBoxItem text="NIT Nagaland" />
+              <MultiComboBoxItem text="NIT Puducherry" />
+              <MultiComboBoxItem text="NIT Meghalaya" />
+              <MultiComboBoxItem text="IIT Bombay" />
+              <MultiComboBoxItem text="IIT Madras" />
+              <MultiComboBoxItem text="IIT Delhi" />
+              <MultiComboBoxItem text="IIT Kharagpur " />
+              <MultiComboBoxItem text="IIT Goa" />
+              <MultiComboBoxItem text="IIT Tirupati" />
+              <MultiComboBoxItem text="IIT Roorkee" />
+              <MultiComboBoxItem text="IIT Kanpur" />
+              <MultiComboBoxItem text="IIT Guwahati" />
+              <MultiComboBoxItem text="IIT Hyderabad" />
+              <MultiComboBoxItem text="IIT Indore" />
+              <MultiComboBoxItem text="IIT (BHU) Varanasi" />
+              <MultiComboBoxItem text="IIT Ropar" />
+              <MultiComboBoxItem text="IIT Jodhpur" />
+              <MultiComboBoxItem text="IIT (ISM)Dhanbad" />
+              <MultiComboBoxItem text="IIT Mandi" />
+              <MultiComboBoxItem text="IIT Bhubaneswar" />
+              <MultiComboBoxItem text="IIT Palakkad" />
+              <MultiComboBoxItem text="IIT Dharwad" />
+              <MultiComboBoxItem text="IIT Gandhinagar" />
+              <MultiComboBoxItem text="IIT Bhilai" />
+              <MultiComboBoxItem text="IIT Jammu" />
+              <MultiComboBoxItem text="IIT Patna" />
+              <MultiComboBoxItem text="Manipal University  " />
+              <MultiComboBoxItem text="Birla Institute of Technology and Science- Pilani" />
+              <MultiComboBoxItem text="Birla Institute of Technology and Science- Hyderabad" />
+
             </MultiComboBox>
           </FormItem>
         </FormGroup>
