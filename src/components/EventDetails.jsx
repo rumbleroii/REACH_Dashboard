@@ -49,12 +49,9 @@ const EventDetails = () => {
         await axios
 
           .get(`http://localhost:4000/${eventId}`)
-
           .then((res) => {
             setEvent(res.data.data[0]);
-
             setLoading(false);
-
             setError(null);
           })
 
@@ -63,9 +60,7 @@ const EventDetails = () => {
           });
       } catch (error) {
         console.error("Error fetching event data:", error);
-
         setLoading(false);
-
         setError("Event not found");
       }
     };
@@ -105,11 +100,8 @@ const EventDetails = () => {
       <Text
         style={{
           display: "flex",
-
           justifyContent: "center",
-
           fontSize: "20px",
-
           margin: "20px",
         }}
       >
@@ -127,13 +119,10 @@ const EventDetails = () => {
 
   const handleSubmit = async () => {
     await axios
-
       .delete(`http://localhost:4000/delete/${eventId}`)
-
       .then((res) => {
         console.log("POSTED");
       })
-
       .catch((res) => {
         console.log(res);
       });
