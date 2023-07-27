@@ -85,70 +85,6 @@ const FormPage = ({ addEvent }) => {
       newCheckpoints[index][field] = value;
       setCheckpoints(newCheckpoints);
     };
-  
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        const errors = validateForm();
-        if (Object.keys(errors).length === 0) {
-            const newEvent = {
-                eventName: formData.eventName,
-                online: formData.online,
-                link: formData.link,
-                venue: formData.venue,
-                eventType: formData.eventType,
-                startDate: formData.startDate,
-                startTime: formData.startTime,
-                endDate: formData.endDate,
-                endTime: formData.endTime,
-                eventDescription: formData.eventDescription,
-                status: formData.status,
-                progress: 0,
-                porName: formData.porName,
-                porEmail: formData.porEmail,
-                institutions: formData.institutions,
-                checkpoint: checkpoints
-            };
-
-            if (formData.id) {
-                newEvent.id = formData.id;
-            }
-
-            // Axios post
-            axios
-                .post("http://localhost:4000/create", newEvent)
-                .then((res) => {
-                    console.log("POSTED");
-                })
-
-                .catch((err) => {
-                    console.log(err);
-                });
-
-            // Show success message
-            setOpen(true);
-            // Clear the form data
-            setFormData({
-                eventName: "",
-                online: false,
-                link: "",
-                venue: "",
-                eventType: "",
-                startDate: "",
-                startTime: "",
-                endDate: "",
-                endTime: "",
-                eventDescription: "",
-                status: "",
-                porName: "",
-                porEmail: "",
-                progress: 0,
-                institutions: [],
-                checkpoint: []
-            });
-        } else {
-            setFormErrors(errors);
-        }
-    };
 
     const handleOnlineChange = (event) => {
         const onlineValue = event.target.checked;
@@ -206,6 +142,70 @@ const FormPage = ({ addEvent }) => {
 
         return errors;
     };
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      const errors = validateForm();
+      if (Object.keys(errors).length === 0) {
+          const newEvent = {
+              eventName: formData.eventName,
+              online: formData.online,
+              link: formData.link,
+              venue: formData.venue,
+              eventType: formData.eventType,
+              startDate: formData.startDate,
+              startTime: formData.startTime,
+              endDate: formData.endDate,
+              endTime: formData.endTime,
+              eventDescription: formData.eventDescription,
+              status: formData.status,
+              progress: formData.progress,
+              porName: formData.porName,
+              porEmail: formData.porEmail,
+              institutions: formData.institutions,
+              checkpoint: checkpoints
+          };
+
+          if (formData.id) {
+              newEvent.id = formData.id;
+          }
+
+          // Axios post
+          axios
+              .post("http://localhost:4000/create", newEvent)
+              .then((res) => {
+                  console.log("POSTED");
+              })
+
+              .catch((err) => {
+                  console.log(err);
+              });
+
+          // Show success message
+          setOpen(true);
+          // Clear the form data
+          setFormData({
+              eventName: "",
+              online: false,
+              link: "",
+              venue: "",
+              eventType: "",
+              startDate: "",
+              startTime: "",
+              endDate: "",
+              endTime: "",
+              eventDescription: "",
+              status: "",
+              porName: "",
+              porEmail: "",
+              progress: 0,
+              institutions: [],
+              checkpoint: []
+          });
+      } else {
+          setFormErrors(errors);
+      }
+  };
 
     useEffect(() => {
         const getEventDetails = async () => {
@@ -357,15 +357,10 @@ const FormPage = ({ addEvent }) => {
                           placeholder="Checkpoint Title"
                         />
                         <FormItem label="Event Status">
-                          <Select style={{margin:"5px"}} name="status" value={formData.status} onChange={(e) => handleCheckpointChange(index, 'status', e.detail.selectedOption.value)}>
-                              <Option value="Success">On-time</Option>
-                              <Option value="Warning">Delayed</Option>
-                              <Option value="Error">Cancelled</Option>
-                              <Option value="Information">Completed</Option>
-                          </Select>
+                          <CheckBox name="online" checked={checkpoint.status} onChange={(e) => handleCheckpointChange(index, 'status', e.target.checked)} />
                         </FormItem>
                         <FormItem label="End Date">
-                          <DatePicker style={{margin:"5px"}} name="endDate" value={formData.endDate} onChange={(e) => handleCheckpointChange(index, 'date', e.target.value)} placeholder="Select end date" />
+                          <DatePicker style={{margin:"5px"}} name="endDate" value={checkpoint.date} onChange={(e) => handleCheckpointChange(index, 'date', e.target.value)} placeholder="Select end date" />
                         </FormItem>
                         <Button onClick={() => handleRemoveCheckpoint(index)}>Remove</Button>
                       </FormItem>
