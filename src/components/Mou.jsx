@@ -47,10 +47,6 @@ const Mou = () => {
               style={{ width:'100%' }}
             />
           </span>
-          <span>
-            <p>Text for Image 2</p>
-          </span>
-          <p>lol</p>
         </div>
       </Card>
 
@@ -64,7 +60,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -78,7 +74,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -92,7 +88,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -106,7 +102,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -120,7 +116,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -134,7 +130,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -148,7 +144,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -162,7 +158,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -176,7 +172,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -190,7 +186,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -205,7 +201,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
       </div>
       </Card>
@@ -219,7 +215,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -233,7 +229,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>
@@ -247,7 +243,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
       </div>
       </Card>
@@ -261,7 +257,7 @@ const Mou = () => {
             />
           </span>
           <span>
-            <p>Text for Image 2</p>
+            
           </span>
         </div>
       </Card>

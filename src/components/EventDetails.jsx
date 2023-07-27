@@ -141,7 +141,14 @@ const EventDetails = () => {
       ) : (
         <>
           <div className="ed">
-            <p className="event-details-header">Event Details</p>
+            <Text style={{
+              fontSize: "25px",
+              fontWeight:"bold",
+              margin:"5px"
+            }}>Event Details</Text>
+            <hr style={{
+              marginBottom:"15px",
+            }}></hr>
 
             <div className="event-details-field">
               <Text className="event-details-label">Event Title:</Text>
@@ -189,7 +196,14 @@ const EventDetails = () => {
           </div>
 
           <div className="status-por">
-            <p className="status-header">Status</p>
+            <Text style={{
+                fontSize: "25px",
+                fontWeight:"bold",
+                margin:"5px"
+              }}>Event Status</Text>
+              <hr style={{
+                marginBottom:"15px",
+              }}></hr>
 
             <div className="event-details-field">
               <Text className="event-details-label">Status:</Text>
@@ -209,7 +223,7 @@ const EventDetails = () => {
                   style={{
                     width: "50%",
                   }}
-                  value={event.progress / 100}
+                  value={event.progress}
                   displayValue={`${event.progress}%`}
                   className="event-details-progress"
                 >
@@ -221,7 +235,14 @@ const EventDetails = () => {
               </Text>
             </div>
 
-            <p className="por-header">Person of the Responsibility Details</p>
+            <Text style={{
+              fontSize: "25px",
+              fontWeight:"bold",
+              margin:"5px"
+            }}>Person Of Responsibility</Text>
+            <hr style={{
+              marginBottom:"15px",
+            }}></hr>
 
             <div className="event-details-field">
               <Text className="event-details-label">Name:</Text>
@@ -247,21 +268,34 @@ const EventDetails = () => {
           </div>
           {/* Timeline */}
           <div className="checkpoints">
-            <p className="timeline-header">Checkpoints</p>
+            <Text style={{
+                fontSize: "25px",
+                fontWeight:"bold",
+                margin:"5px"
+              }}>Checkpoints</Text>
+              <hr style={{
+                marginBottom:"15px",
+              }}></hr>
             <Timeline layout="Horizontal">
-              <TimelineItem
-                icon="calender"
-                name="John Smith"
-                subtitleText="2019/01/01"
-                titleText="Schedule Call"
-              />
-              <TimelineItem
-                icon="calendar"
-                subtitleText="2019/01/02"
-                titleText="Weekly Sync - CP Design"
-              >
-                <div>MR SOF02 2.43</div>
-              </TimelineItem>
+              {event.checkpoint.length === 0 ? (<Text>Set Checkpoints through the edit option!</Text>) : null}
+              {event.checkpoint.map((checkpoint, index) => (
+                <TimelineItem
+                  icon="calendar"
+                  subtitleText={checkpoint.date}
+                  titleText={checkpoint.title}
+                >
+                {checkpoint.status === true ? (
+                  <ObjectStatus state="Success">
+                    Completed
+                  </ObjectStatus>
+                ) : (
+                  <ObjectStatus state="Error">
+                    Not Completed
+                  </ObjectStatus>
+                )}
+                </TimelineItem>
+              ))}
+                
             </Timeline>
           </div>
 

@@ -2,19 +2,12 @@
 
 .event-details-container {
   display: inherit;
-
   justify-content: space-between;
-
   gap: 40px;
-
   max-width: 1000px;
-
   margin: 50px;
-
   margin-left: 80px;
   vertical-align: middle;
-  
-
 }
 
 .event-details-column {
