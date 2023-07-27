@@ -34,5 +34,23 @@
     "porEmail": "sdfgdfsg",
     "institutions": [],
     "id": "bi4rj9d7r0lkjizz6t"
+  },
+  {
+    "eventName": "ted talk",
+    "online": false,
+    "link": "",
+    "venue": "sap",
+    "eventType": "Research",
+    "startDate": "Jul 18, 2023",
+    "startTime": "",
+    "endDate": "Jul 19, 2023",
+    "endTime": "",
+    "eventDescription": "",
+    "status": "Success",
+    "progress": 0,
+    "porName": "aadhya",
+    "porEmail": "aadhya2003@gmail.com",
+    "institutions": [],
+    "id": "5bo3g84oclkkwlwfi"
   }
 ]
