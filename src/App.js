@@ -21,11 +21,8 @@ function App() {
         <Route path="/create-event" element={<Form />}></Route>
         <Route path="/" element={<Home />} />
         <Route path="/mou" element={<Mou />} />
-        {/* <Route path="/create-event" element={<Form addEvent={addEvent} />} /> */}
         <Route path="/edit/:eventId" element={<Form />} />
         <Route path="/event-details/:eventId" element={<EventDetails />} />
-        {/* <Route path="/create-event" element={<Form />} /> */}
-        {/* <Route path="/event-details/:eventId" element={<EventDetails />} /> */}
       </Routes>
       <Footer />
     </>

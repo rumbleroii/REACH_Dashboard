@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { AnalyticalTable, ProgressIndicator, ObjectStatus,FlexBox,Button } from '@ui5/webcomponents-react';
+import { AnalyticalTable, ProgressIndicator, ObjectStatus } from '@ui5/webcomponents-react';
 
 // Status
 const statusObject = {
