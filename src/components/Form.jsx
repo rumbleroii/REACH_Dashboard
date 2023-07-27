@@ -257,10 +257,10 @@ const FormPage = ({ addEvent }) => {
         columnsM={1}
         columnsS={1}
         columnsXL={3}
-        labelSpanL={4}
-        labelSpanM={2}
-        labelSpanS={12}
-        labelSpanXL={4}
+        labelSpanL={3}
+        labelSpanM={1}
+        labelSpanS={1}
+        labelSpanXL={1}
         titleText={
           <h1>
             <b>Add Event</b>
@@ -434,53 +434,6 @@ const FormPage = ({ addEvent }) => {
           </FormItem>
         </FormGroup>
 
-        <FormGroup titleText="Event Checkpoints">
-          <div>
-            {checkpoints.map((checkpoint, index) => (
-              <FormItem key={index}>
-                <Input
-                  type="text"
-                  value={checkpoint.title}
-                  onChange={(e) =>
-                    handleCheckpointChange(index, "title", e.target.value)
-                  }
-                  placeholder="Checkpoint Title"
-                />
-                <FormItem label="Event Status">
-                  <CheckBox
-                    name="online"
-                    checked={checkpoint.status}
-                    onChange={(e) =>
-                      handleCheckpointChange(index, "status", e.target.checked)
-                    }
-                  />
-                </FormItem>
-                <FormItem label="End Date">
-                  <DatePicker
-                    style={{ margin: "5px" }}
-                    name="endDate"
-                    value={checkpoint.date}
-                    onChange={(e) =>
-                      handleCheckpointChange(index, "date", e.target.value)
-                    }
-                    placeholder="Select end date"
-                  />
-                </FormItem>
-                <Button onClick={() => handleRemoveCheckpoint(index)}>
-                  Remove
-                </Button>
-              </FormItem>
-            ))}
-          </div>
-          <Button
-            style={{ width: "200px", margin: "30px" }}
-            design="Emphasized"
-            onClick={handleAddCheckpoint}
-          >
-            Add Checkpoint
-          </Button>
-        </FormGroup>
-
         <FormGroup titleText="Point Of Responsibility Data">
           <FormItem label="Name">
             <Input
@@ -526,6 +479,62 @@ const FormPage = ({ addEvent }) => {
               <MultiComboBoxItem text="XXX" />
               <MultiComboBoxItem text="YYY" />
             </MultiComboBox>
+          </FormItem>
+        </FormGroup>
+
+        <FormGroup titleText="Checkpoint Data">
+          {checkpoints.map((checkpoint, index) => (
+            <>
+              <FormItem label="Checkpoint Title">
+                <Input
+                  type="text"
+                  value={checkpoint.title}
+                  onChange={(e) =>
+                    handleCheckpointChange(index, "title", e.target.value)
+                  }
+                  placeholder="Checkpoint Title"
+                />
+              </FormItem>
+              <FormItem label="Checkpoint Status">
+                <CheckBox
+                  name="status"
+                  checked={checkpoint.status}
+                  onChange={(e) =>
+                    handleCheckpointChange(index, "status", e.target.checked)
+                  }
+                />
+              </FormItem>
+              <FormItem label="Checkpoint End Date">
+                <DatePicker
+                  style={{ margin: "5px" }}
+                  name="endDate"
+                  value={checkpoint.date}
+                  onChange={(e) =>
+                    handleCheckpointChange(index, "date", e.target.value)
+                  }
+                  placeholder="Select end date"
+                />
+              </FormItem>
+              <FormItem>
+                <Button onClick={() => handleRemoveCheckpoint(index)}>
+                  Remove
+                </Button>
+              </FormItem>
+              <FormItem>
+            </>
+          ))}
+          <FormItem>
+            <Button
+              style={{
+                width: "200px",
+                margin: "30px",
+                display: "inline-block",
+              }}
+              design="Emphasized"
+              onClick={handleAddCheckpoint}
+            >
+              Add Checkpoint
+            </Button>
           </FormItem>
         </FormGroup>
       </Form>
