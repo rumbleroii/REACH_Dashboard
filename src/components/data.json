@@ -1,1 +1,33 @@
-[]
+[
+  {
+    "eventName": "hgc",
+    "online": false,
+    "link": "",
+    "venue": "hjmj",
+    "eventType": "Research",
+    "startDate": "Jul 28, 2023",
+    "startTime": "12:13:50 AM",
+    "endDate": "Jul 30, 2023",
+    "endTime": "5:13:54 AM",
+    "eventDescription": "lhk",
+    "status": "Success",
+    "progress": 0,
+    "porName": "Amyra G",
+    "porEmail": "gandetivishnu5101@gmail.com",
+    "institutions": [
+      "VJTI",
+      "Cummins",
+      "Amritha",
+      "XXX",
+      "YYY"
+    ],
+    "checkpoint": [
+      {
+        "title": "",
+        "status": "",
+        "date": ""
+      }
+    ],
+    "id": "bi4rj9d7dolkli7f7h"
+  }
+]
