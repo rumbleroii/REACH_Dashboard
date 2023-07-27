@@ -520,7 +520,6 @@ const FormPage = ({ addEvent }) => {
                   Remove
                 </Button>
               </FormItem>
-              <FormItem>
             </>
           ))}
           <FormItem>
