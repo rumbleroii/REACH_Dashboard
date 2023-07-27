@@ -25,7 +25,7 @@ const Navigation = () => {
       }
         
       style={{
-        height:"60px",
+        height:"50px",
         backgroundColor: "#354a5f"
       }}
     >

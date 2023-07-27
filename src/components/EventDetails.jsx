@@ -3,7 +3,6 @@ import { Navigate, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {
   ProgressIndicator,
-  ObjectStatus,
   Button,
   MessageBox,
   Text,
@@ -16,10 +15,10 @@ import "./EventDetails.css";
 
 const EventDetails = () => {
   const { eventId } = useParams();
-
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   // Use the useNavigate hook to get the navigation function
   const navigate = useNavigate();
 
@@ -92,7 +91,6 @@ const EventDetails = () => {
   const handleEdit = () => {
     // Replace 'editPath' with the actual path to the edit page, passing the event ID as a parameter
     const editPath = `/edit/${eventId}`;
-    // Navigate to the edit page with the event ID
     navigate(editPath);
   };
 
@@ -153,9 +151,9 @@ const EventDetails = () => {
             </div>
             <div className="event-details-field">
               <Text className="event-details-label">Event Description:</Text>
-              <div className="event-details-value">
+              <Text className="event-details-value">
                 {event.eventDescription}
-              </div>
+              </Text>
             </div>
           </div>
 

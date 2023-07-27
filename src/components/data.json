@@ -1,23 +1,5 @@
 [
   {
-    "eventName": "Rithik",
-    "online": false,
-    "link": "",
-    "venue": "RITHIK RITHIK",
-    "eventType": "Research",
-    "startDate": "Jul 10, 2023",
-    "startTime": "",
-    "endDate": "Jul 4, 2023",
-    "endTime": "",
-    "eventDescription": "RITHIK RITHIK",
-    "status": "Information",
-    "progress": 0,
-    "porName": "sdfgfdsg",
-    "porEmail": "dsfgdsfg",
-    "institutions": [],
-    "id": "bi4rj9d7r0lkjizlwo"
-  },
-  {
     "eventName": "dsfgdsgd",
     "online": false,
     "link": "",
@@ -34,5 +16,23 @@
     "porEmail": "sdfgdfsg",
     "institutions": [],
     "id": "bi4rj9d7r0lkjizz6t"
+  },
+  {
+    "eventName": "sdsd",
+    "online": false,
+    "link": "",
+    "venue": "sdsds",
+    "eventType": "Experience",
+    "startDate": "Jun 27, 2023",
+    "startTime": "",
+    "endDate": "Jul 19, 2023",
+    "endTime": "",
+    "eventDescription": "sdsd",
+    "status": "Error",
+    "progress": 0,
+    "porName": "sdsd",
+    "porEmail": "sdsd",
+    "institutions": [],
+    "id": "bi4rj9d1hslkkwx3yj"
   }
 ]
