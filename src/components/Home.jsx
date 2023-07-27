@@ -15,7 +15,6 @@ import axios from "axios";
 
 import Analystics from "./Analystics";
 
-
 const Home = () => {
   const [data, setAllData] = useState([]);
   const [updatedData, setData] = useState([]);
@@ -24,12 +23,13 @@ const Home = () => {
 
   // Fetch All Data
   useEffect(() => {
-    axios.get("http://localhost:4000/all")
+    axios.get("https://reach-backend.onrender.com/all")
     .then((res) => {
       setAllData(res.data.data);
       setData(res.data.data);
     })
     .catch((err) => {
+      console.log(err);
       setAllData([]);
       console.log(err);
       })

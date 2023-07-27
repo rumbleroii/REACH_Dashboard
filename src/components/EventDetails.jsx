@@ -39,7 +39,7 @@ const EventDetails = () => {
   useEffect(() => {
     const getEventData = async () => {
       try {
-        await axios.get(`http://localhost:4000/${eventId}`)
+        await axios.get(`https://reach-backend.onrender.com/${eventId}`)
           .then((res) => {
             setEvent(res.data.data[0]);
             setLoading(false);
@@ -129,7 +129,7 @@ const EventDetails = () => {
   };
 
   const handleSubmit = async () => {
-    await axios.delete(`http://localhost:4000/delete/${eventId}`)
+    await axios.get(`https://reach-backend.onrender.com/delete/${eventId}`)
       .then((res) => {
         console.log("POSTED");
       })

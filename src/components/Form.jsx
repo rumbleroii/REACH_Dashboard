@@ -173,7 +173,7 @@ const FormPage = ({ addEvent }) => {
 
       // Axios post
       axios
-        .post("http://localhost:4000/create", newEvent)
+        .post("https://reach-backend.onrender.com/create", newEvent)
         .then((res) => {
           console.log("POSTED");
         })
@@ -211,7 +211,7 @@ const FormPage = ({ addEvent }) => {
   useEffect(() => {
     const getEventDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/${eventId}`);
+        const response = await axios.get(`https://reach-backend.onrender.com/${eventId}`);
         const eventData = response.data.data[0];
 
         setFormData({
