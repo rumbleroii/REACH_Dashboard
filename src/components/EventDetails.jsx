@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Navigate, useParams } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
+import { Timeline, TimelineItem } from "@ui5/webcomponents-react";
+import { Icon } from '@ui5/webcomponents-react';
 
 import {
   ProgressIndicator,
@@ -158,12 +160,6 @@ const EventDetails = () => {
             </div>
 
             <div className="event-details-field">
-              <Text className="event-details-label">Event ID:</Text>
-
-              <Text className="event-details-value">{event.id}</Text>
-            </div>
-
-            <div className="event-details-field">
               <Text className="event-details-label">Category:</Text>
 
               <Text className="event-details-value">{event.eventType}</Text>
@@ -259,23 +255,39 @@ const EventDetails = () => {
               </div>
             )}
           </div>
+          {/* Timeline */}
+          <div className="checkpoints">
+            <p className="timeline-header">Checkpoints</p>
+            <Timeline layout="Horizontal">
+              <TimelineItem
+              
+                icon="phone"
+                name="John Smith"
+                subtitleText="2019/01/01"
+                titleText="Schedule Call"
+              />
+              <TimelineItem
+                icon="calendar"
+                subtitleText="2019/01/02"
+                titleText="Weekly Sync - CP Design"
+              >
+                <div>MR SOF02 2.43</div>
+              </TimelineItem>
+            </Timeline>
+          </div>
 
           <div
             className="buttons-container"
             style={{
-              position: "absolute",
+              position: "relative",
 
               bottom: "20px",
 
-              left: "50%",
+              left: "82%",
 
               transform: "translateX(-50%)",
 
-              display: "flex",
-
-              justifyContent: "center",
-
-              alignItems: "center",
+              display: "inherit",
 
               margin: "40px",
 
@@ -287,7 +299,7 @@ const EventDetails = () => {
                 justifyContent: "center",
 
                 alignItems: "center",
-                marginLeft: "-62px",
+                // marginLeft: "100px",
               }}
             >
               <Button
@@ -300,9 +312,11 @@ const EventDetails = () => {
               <Button
                 style={{
                   width: "120px",
-                  backgroundColor: "#ff5c33",
+                  borderColor: "#bb0000",
+                  backgroundColor: "#bb0000",
                   margin: "20px",
                   marginBottom: "0px",
+                  color: "white",
                 }}
                 design="Emphasized"
                 onClick={handleSubmit}
