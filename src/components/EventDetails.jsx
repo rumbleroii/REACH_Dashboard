@@ -4,7 +4,8 @@ import { Navigate, useParams } from "react-router-dom";
 
 import { useNavigate } from "react-router-dom";
 import { Timeline, TimelineItem } from "@ui5/webcomponents-react";
-import { Icon } from '@ui5/webcomponents-react';
+import { Icon } from "@ui5/webcomponents-react";
+import "@ui5/webcomponents-icons/dist/calendar";
 
 import {
   ProgressIndicator,
@@ -260,8 +261,7 @@ const EventDetails = () => {
             <p className="timeline-header">Checkpoints</p>
             <Timeline layout="Horizontal">
               <TimelineItem
-              
-                icon="phone"
+                icon="calender"
                 name="John Smith"
                 subtitleText="2019/01/01"
                 titleText="Schedule Call"
