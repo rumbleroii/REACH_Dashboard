@@ -26,109 +26,70 @@ import {
 } from "@ui5/webcomponents-react";
 
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
-
 import "./Form.css";
 
 const FormPage = ({ addEvent }) => {
     const { eventId } = useParams();
-
     const location = useLocation();
-
     const [open, setOpen] = useState(false);
-
     const [formErrors, setFormErrors] = useState({});
-
     const [formData, setFormData] = useState({
         eventName: "",
-
         online: false,
-
         link: "",
-
         venue: "",
-
         eventType: "Research",
-
         startDate: "",
-
         startTime: "",
-
         endDate: "",
-
         endTime: "",
-
         status: "Success",
-
         progress: 0,
-
         eventDescription: "",
-
         porName: "",
-
         porEmail: "",
-
         institutions: [],
     });
 
     const handleInputChange = (event) => {
         let { name, value } = event.target;
-
         if (name === "eventType") value = event.detail.selectedOption.value;
-
         if (name === "status") value = event.detail.selectedOption.value;
-
-        console.log(name, value);
-
         setFormData((prevFormData) => ({
             ...prevFormData,
-
             [name]: value,
         }));
     };
 
     const handleMultiComboBoxChange = (event) => {
+      console.log(event.detail.items);
         setFormData((prevFormData) => ({
             ...prevFormData,
-
-            institutions: event.detail.selectedItems.map((item) => item.text),
+            institutions: event.detail.items.map((item) => item.text),
         }));
+        console.log(formData.institutions);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
         const errors = validateForm();
 
         if (Object.keys(errors).length === 0) {
             const newEvent = {
                 eventName: formData.eventName,
-
                 online: formData.online,
-
                 link: formData.link,
-
                 venue: formData.venue,
-
                 eventType: formData.eventType,
-
                 startDate: formData.startDate,
-
                 startTime: formData.startTime,
-
                 endDate: formData.endDate,
-
                 endTime: formData.endTime,
-
                 eventDescription: formData.eventDescription,
-
                 status: formData.status,
-
                 progress: 0,
-
                 porName: formData.porName,
-
                 porEmail: formData.porEmail,
-
                 institutions: formData.institutions,
             };
 
@@ -140,7 +101,6 @@ const FormPage = ({ addEvent }) => {
 
             axios
                 .post("http://localhost:4000/create", newEvent)
-
                 .then((res) => {
                     console.log("POSTED");
                 })
@@ -150,40 +110,23 @@ const FormPage = ({ addEvent }) => {
                 });
 
             // Show success message
-
             setOpen(true);
-
             // Clear the form data
-
             setFormData({
                 eventName: "",
-
                 online: false,
-
                 link: "",
-
                 venue: "",
-
                 eventType: "",
-
                 startDate: "",
-
                 startTime: "",
-
                 endDate: "",
-
                 endTime: "",
-
                 eventDescription: "",
-
                 status: "",
-
                 porName: "",
-
                 porEmail: "",
-
                 progress: 0,
-
                 institutions: [],
             });
         } else {
@@ -196,11 +139,8 @@ const FormPage = ({ addEvent }) => {
 
         setFormData((prevFormData) => ({
             ...prevFormData,
-
             online: onlineValue,
-
             link: onlineValue ? prevFormData.link : "", // Set link if online, otherwise clear it
-
             venue: onlineValue ? "" : prevFormData.venue, // Set venue if not online, otherwise clear it
         }));
     };
@@ -260,35 +200,20 @@ const FormPage = ({ addEvent }) => {
 
                 setFormData({
                     id: eventData.id,
-
                     eventName: eventData.eventName,
-
                     online: eventData.online,
-
                     link: eventData.link,
-
                     venue: eventData.venue,
-
                     eventType: eventData.eventType,
-
                     startDate: eventData.startDate,
-
                     startTime: eventData.startTime,
-
                     endDate: eventData.endDate,
-
                     endTime: eventData.endTime,
-
                     eventDescription: eventData.eventDescription,
-
                     status: eventData.status,
-
                     porName: eventData.porName,
-
                     porEmail: eventData.porEmail,
-
                     progress: eventData.progress,
-
                     institutions: eventData.institutions || [], // In case institutions is null
                 });
             } catch (error) {
@@ -305,6 +230,7 @@ const FormPage = ({ addEvent }) => {
         }
     }, [eventId, location.pathname]);
 
+    // CSS 
     return (
         <div style={{ margin: "30px", marginBottom: "40px" }}>
             <Form
@@ -325,83 +251,66 @@ const FormPage = ({ addEvent }) => {
             >
                 <FormGroup titleText="Event Data">
                     <FormItem label="Event Name">
-                        <Input name="eventName" value={formData.eventName} onChange={handleInputChange} placeholder="Enter event name" />
-
+                        <Input style={{margin:"5px"}} name="eventName" value={formData.eventName} onChange={handleInputChange} placeholder="Enter event name" />
                         {formErrors.eventName && <div className="form-error">{formErrors.eventName}</div>}
                     </FormItem>
 
                     <FormItem label="Online">
                         <CheckBox name="online" checked={formData.online} onChange={handleOnlineChange} />
                     </FormItem>
+    
+                    <FormItem label="Link">
+                      <Input style={{margin:"5px"}} name="link" value={formData.link} onChange={handleInputChange} placeholder="Enter the Link" />
+                      {formErrors.link && <div className="form-error">{formErrors.link}</div>}
+                    </FormItem>
 
-                    {formData.online ? (
-                        <FormItem label="Link">
-                            <Input name="link" value={formData.link} onChange={handleInputChange} placeholder="Enter the Link" />
-
-                            {formErrors.link && <div className="form-error">{formErrors.link}</div>}
-                        </FormItem>
-                    ) : (
-                        <FormItem
-                            label={
-                                <Label>
-                                    Venue <i></i>
-                                </Label>
-                            }
-                        >
-                            <Input name="venue" value={formData.venue} onChange={handleInputChange} placeholder="Enter the Venue" />
-
-                            {formErrors.venue && <div className="form-error">{formErrors.venue}</div>}
-                        </FormItem>
-                    )}
-
+                    <FormItem label="Venue">
+                      <Input style={{margin:"5px"}} name="venue" disabled={formData.online} value={formData.venue} onChange={handleInputChange} placeholder="Enter the Venue" />
+                      {formErrors.venue && <div className="form-error">{formErrors.venue}</div>}
+                    </FormItem>
+                
                     <FormItem label="Event Type">
-                        <Select name="eventType" value={formData.eventType} onChange={handleInputChange}>
+                        <Select style={{margin:"5px"}} name="eventType" value={formData.eventType} onChange={handleInputChange}>
                             <Option value="Research">Research</Option>
-
                             <Option value="Experience">Experience</Option>
-
                             <Option value="Learning">Learning</Option>
                         </Select>
-
                         {formErrors.eventType && <div className="form-error">{formErrors.eventType}</div>}
                     </FormItem>
 
                     <FormItem label="Start Date">
-                        <DatePicker name="startDate" value={formData.startDate} onChange={handleInputChange} placeholder="Select start date" />
+                        <DatePicker style={{margin:"5px"}} name="startDate" value={formData.startDate} onChange={handleInputChange} placeholder="Select start date" />
 
                         {formErrors.startDate && <div className="form-error">{formErrors.startDate}</div>}
                     </FormItem>
 
                     <FormItem label="Start Time">
-                        <TimePicker name="startTime" value={formData.startTime} onChange={handleInputChange} placeholder="Select start time" />
+                        <TimePicker style={{margin:"5px"}} name="startTime" value={formData.startTime} onChange={handleInputChange} placeholder="Select start time" />
 
                         {formErrors.startTime && <div className="form-error">{formErrors.startTime}</div>}
                     </FormItem>
 
                     <FormItem label="End Date">
-                        <DatePicker name="endDate" value={formData.endDate} onChange={handleInputChange} placeholder="Select end date" />
+                        <DatePicker style={{margin:"5px"}} name="endDate" value={formData.endDate} onChange={handleInputChange} placeholder="Select end date" />
 
                         {formErrors.endDate && <div className="form-error">{formErrors.endDate}</div>}
                     </FormItem>
 
                     <FormItem label="End Time">
-                        <TimePicker name="endTime" value={formData.endTime} onChange={handleInputChange} placeholder="Select end time" />
+                        <TimePicker style={{margin:"5px"}} name="endTime" value={formData.endTime} onChange={handleInputChange} placeholder="Select end time" />
 
                         {formErrors.endTime && <div className="form-error">{formErrors.endTime}</div>}
                     </FormItem>
 
                     <FormItem label={<Label style={{ alignSelf: "start", paddingTop: "0.25rem" }}>Event Description</Label>}>
-                        <TextArea name="eventDescription" value={formData.eventDescription} onChange={handleInputChange} placeholder="Briefly tell us about your Event" rows={5} />
+                        <TextArea style={{margin:"5px"}} name="eventDescription" value={formData.eventDescription} onChange={handleInputChange} placeholder="Briefly tell us about your Event" rows={5} />
                     </FormItem>
 
                     <FormItem label="Event Status">
-                        <Select name="status" value={formData.status} onChange={handleInputChange}>
+                        <Select style={{margin:"5px"}} name="status" value={formData.status} onChange={handleInputChange}>
                             <Option value="Success">On-time</Option>
-
                             <Option value="Warning">Delayed</Option>
-
                             <Option value="Error">Cancelled</Option>
-
                             <Option value="Information">Completed</Option>
                         </Select>
 
@@ -410,35 +319,34 @@ const FormPage = ({ addEvent }) => {
                 </FormGroup>
 
                 <FormGroup titleText="Point Of Responsibility Data">
-                    <FormItem label="POR Name">
-                        <Input name="porName" value={formData.porName} onChange={handleInputChange} placeholder="Enter POR name" />
+                    <FormItem label="Name">
+                        <Input style={{margin:"5px"}} name="porName" value={formData.porName} onChange={handleInputChange} placeholder="Enter POR name" />
 
                         {formErrors.porName && <div className="form-error">{formErrors.porName}</div>}
                     </FormItem>
 
-                    <FormItem label="POR E-mail ID">
-                        <Input name="porEmail" value={formData.porEmail} onChange={handleInputChange} placeholder="Enter email Id" />
+                    <FormItem label="E-mail ID">
+                        <Input style={{margin:"5px"}} name="porEmail" value={formData.porEmail} onChange={handleInputChange} placeholder="Enter email Id" />
 
                         {formErrors.porEmail && <div className="form-error">{formErrors.porEmail}</div>}
                     </FormItem>
 
                     <FormItem label="Institutions">
                         <MultiComboBox
+                            style={{margin:"5px"}}
                             name="institutions"
                             selectedItems={formData.institutions.map((item) => ({
                                 text: item,
                             }))}
-                            onChange={handleMultiComboBoxChange}
+                            //onChange={handleMultiComboBoxChange}
+                            //onInput={handleMultiComboBoxChange}
+                            onSelectionChange={handleMultiComboBoxChange}
                             placeholder="Select the Universities you want"
                         >
                             <MultiComboBoxItem text="VJTI" />
-
                             <MultiComboBoxItem text="Cummins" />
-
                             <MultiComboBoxItem text="Amritha" />
-
                             <MultiComboBoxItem text="XXX" />
-
                             <MultiComboBoxItem text="YYY" />
                         </MultiComboBox>
                     </FormItem>
