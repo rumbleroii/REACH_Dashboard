@@ -1,7 +1,19 @@
 import React from 'react';
-import { FlexBox, Card, Text, FlexBoxJustifyContent, FlexBoxAlignItems } from '@ui5/webcomponents-react';
+import { FlexBox, Card, Text, FlexBoxJustifyContent } from '@ui5/webcomponents-react';
 
 const Mou = () => {
+  
+  const handleCardHover = (event) => {
+    event.currentTarget.style.transform = 'scale(1.05)';
+    event.currentTarget.style.backgroundColor = '#e0e0e0';
+  };
+
+  const handleCardLeave = (event) => {
+    event.currentTarget.style.transform = 'scale(1)';
+    event.currentTarget.style.backgroundColor = '#f5f5f5';
+  };
+
+  //CSS
   const imageStyle = { width: '200px', height: '150px', marginRight: '10px', marginLeft: '50px'};
 
   const cardStyle = {
@@ -12,22 +24,6 @@ const Mou = () => {
     boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
     backgroundColor: '#f5f5f5',
     transition: 'transform 0.3s ease-in-out, background-color 0.3s ease-in-out'
-  };
-
-  const flexBoxStyle = {
-    alignItems:"center",
-    marginTop: "10px",
-    marginBottom: '10px', // Gap between each row (vertical)
-  };
-
-  const handleCardHover = (event) => {
-    event.currentTarget.style.transform = 'scale(1.05)';
-    event.currentTarget.style.backgroundColor = '#e0e0e0';
-  };
-
-  const handleCardLeave = (event) => {
-    event.currentTarget.style.transform = 'scale(1)';
-    event.currentTarget.style.backgroundColor = '#f5f5f5';
   };
 
   return (
@@ -261,8 +257,6 @@ const Mou = () => {
           </span>
         </div>
       </Card>
-
-      {/* Add more Cards with FlexBoxes as needed... */}
     </FlexBox>
   );
 };

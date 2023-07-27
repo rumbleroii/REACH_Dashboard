@@ -23,6 +23,7 @@ import {
   FlexBox,
   FlexBoxAlignItems,
   FlexBoxJustifyContent,
+  Text
 } from "@ui5/webcomponents-react";
 
 import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
@@ -251,16 +252,17 @@ const FormPage = ({ addEvent }) => {
   // CSS
   return (
     <div style={{ margin: "30px", marginBottom: "40px" }}>
+        
       <Form
         backgroundDesign="Transparent"
-        columnsL={2}
+        columnsL={1}
         columnsM={1}
         columnsS={1}
-        columnsXL={3}
-        labelSpanL={3}
-        labelSpanM={1}
+        columnsXL={2}
+        labelSpanL={2}
+        labelSpanM={2}
         labelSpanS={1}
-        labelSpanXL={1}
+        labelSpanXL={2}
         titleText={
           <h1>
             <b>Add Event</b>
@@ -270,7 +272,7 @@ const FormPage = ({ addEvent }) => {
         <FormGroup titleText="Event Data">
           <FormItem label="Event Name">
             <Input
-              style={{ margin: "5px" }}
+              //style={{ margin: "5px" }}
               name="eventName"
               value={formData.eventName}
               onChange={handleInputChange}
@@ -316,7 +318,7 @@ const FormPage = ({ addEvent }) => {
             )}
           </FormItem>
 
-          <FormItem label="Event Type">
+          <FormItem label="Event Category">
             <Select
               style={{ margin: "5px" }}
               name="eventType"
@@ -433,7 +435,7 @@ const FormPage = ({ addEvent }) => {
             )}
           </FormItem>
         </FormGroup>
-
+              
         <FormGroup titleText="Point Of Responsibility Data">
           <FormItem label="Name">
             <Input
@@ -482,7 +484,7 @@ const FormPage = ({ addEvent }) => {
           </FormItem>
         </FormGroup>
 
-        <FormGroup titleText="Checkpoint Data">
+        {/* <FormGroup titleText="Checkpoint Data">
           {checkpoints.map((checkpoint, index) => (
             <>
               <FormItem label="Checkpoint Title">
@@ -535,20 +537,77 @@ const FormPage = ({ addEvent }) => {
               Add Checkpoint
             </Button>
           </FormItem>
-        </FormGroup>
+        </FormGroup> */}
       </Form>
-
-      <FlexBox
-        alignItems={FlexBoxAlignItems.Center}
-        justifyContent={FlexBoxJustifyContent.Center}
-      >
-        <Button
-          style={{ width: "120px", margin: "30px" }}
+      <hr></hr>
+      <div style={{ marginTop:"50px"}}>
+        <Text style={{fontWeight:"bold", marginBottom:"20px"}}>Checkpoint Data</Text>
+        <div>
+          {checkpoints.map((checkpoint, index) => (
+            <FlexBox style={{
+              gap:"40px"
+            }}alignItems={FlexBoxAlignItems.Center}>
+                <Text>{index}.</Text>
+                <Input
+                  type="text"
+                  style={{width:"500px"}}
+                  value={checkpoint.title}
+                  onChange={(e) =>
+                    handleCheckpointChange(index, "title", e.target.value)
+                  }
+                  placeholder="Checkpoint Title"
+                />
+                            
+                <DatePicker
+                  style={{ margin: "5px" }}
+                  name="endDate"
+                  value={checkpoint.date}
+                  onChange={(e) =>
+                    handleCheckpointChange(index, "date", e.target.value)
+                  }
+                  placeholder="Select end date"
+                />
+                <FlexBox alignItems={FlexBoxAlignItems.Center}>
+                <Text>Completed</Text>
+                <CheckBox
+                  name="status"
+                  checked={checkpoint.status}
+                  onChange={(e) =>
+                    handleCheckpointChange(index, "status", e.target.checked)
+                  }
+                />  
+                </FlexBox>  
+    
+                <Button onClick={() => handleRemoveCheckpoint(index)}>
+                  Remove
+                </Button>
+            </FlexBox>
+            
+          ))}
+          
+          <Button
+            style={{
+              width: "200px",
+              marginTop:"20px"
+            }}
+            design="Emphasized"
+            onClick={handleAddCheckpoint}
+          >
+            Add Checkpoint
+          </Button>
+        </div>
+      </div>
+      <Button
+          style={{ width: "120px", float:"right", margin:"50px", border:"red", backgroundColor:"red"}}
           design="Emphasized"
           onClick={handleSubmit}
         >
           Submit
-        </Button>
+      </Button>
+      <FlexBox
+        alignItems={FlexBoxAlignItems.Center}
+        justifyContent={FlexBoxJustifyContent.Center}
+      >
 
         {open && (
           <MessageBox

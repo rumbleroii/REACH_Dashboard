@@ -1,1 +1,42 @@
-[]
+[
+  {
+    "eventName": "ffsdf",
+    "online": false,
+    "link": "sdfdsfsdf",
+    "venue": "sdfsdfs",
+    "eventType": "Learning",
+    "startDate": "Jul 19, 2023",
+    "startTime": "7:45:04 PM",
+    "endDate": "Jul 21, 2023",
+    "endTime": "6:45:02 PM",
+    "eventDescription": "wfwfew",
+    "status": "Information",
+    "progress": 33,
+    "porName": "sdsad",
+    "porEmail": "sasad",
+    "institutions": [
+      "VJTI",
+      "Cummins",
+      "XXX",
+      "YYY"
+    ],
+    "checkpoint": [
+      {
+        "title": "sdfsdf",
+        "status": true,
+        "date": "Jul 4, 2023"
+      },
+      {
+        "title": "sfsdfasdasdasdsad",
+        "status": false,
+        "date": "Jul 18, 2023"
+      },
+      {
+        "title": "",
+        "status": "",
+        "date": ""
+      }
+    ],
+    "id": "bi4rj9dijklkl8lajp"
+  }
+]

@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 import Analystics from "./Analystics";
-import "./Home.css";
+
 
 const Home = () => {
   const [data, setAllData] = useState([]);
