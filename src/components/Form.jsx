@@ -32,6 +32,7 @@ const FormPage = ({ addEvent }) => {
     const { eventId } = useParams();
     const location = useLocation();
     const [open, setOpen] = useState(false);
+    const [checkpoints, setCheckpoints] = useState([]);
     const [formErrors, setFormErrors] = useState({});
     const [formData, setFormData] = useState({
         eventName: "",
@@ -49,6 +50,7 @@ const FormPage = ({ addEvent }) => {
         porName: "",
         porEmail: "",
         institutions: [],
+        checkpoint: []
     });
 
     const handleInputChange = (event) => {
@@ -62,18 +64,31 @@ const FormPage = ({ addEvent }) => {
     };
 
     const handleMultiComboBoxChange = (event) => {
-      console.log(event.detail.items);
         setFormData((prevFormData) => ({
             ...prevFormData,
             institutions: event.detail.items.map((item) => item.text),
         }));
-        console.log(formData.institutions);
     };
 
+    const handleAddCheckpoint = () => {
+      setCheckpoints([...checkpoints, { title: '', status: '', date: '' }]);
+    };
+
+    const handleRemoveCheckpoint = (index) => {
+      const newCheckpoints = [...checkpoints];
+      newCheckpoints.splice(index, 1);
+      setCheckpoints(newCheckpoints);
+    };
+  
+    const handleCheckpointChange = (index, field, value) => {
+      const newCheckpoints = [...checkpoints];
+      newCheckpoints[index][field] = value;
+      setCheckpoints(newCheckpoints);
+    };
+  
     const handleSubmit = (event) => {
         event.preventDefault();
         const errors = validateForm();
-
         if (Object.keys(errors).length === 0) {
             const newEvent = {
                 eventName: formData.eventName,
@@ -91,6 +106,7 @@ const FormPage = ({ addEvent }) => {
                 porName: formData.porName,
                 porEmail: formData.porEmail,
                 institutions: formData.institutions,
+                checkpoint: checkpoints
             };
 
             if (formData.id) {
@@ -98,7 +114,6 @@ const FormPage = ({ addEvent }) => {
             }
 
             // Axios post
-
             axios
                 .post("http://localhost:4000/create", newEvent)
                 .then((res) => {
@@ -128,6 +143,7 @@ const FormPage = ({ addEvent }) => {
                 porEmail: "",
                 progress: 0,
                 institutions: [],
+                checkpoint: []
             });
         } else {
             setFormErrors(errors);
@@ -195,7 +211,6 @@ const FormPage = ({ addEvent }) => {
         const getEventDetails = async () => {
             try {
                 const response = await axios.get(`http://localhost:4000/${eventId}`);
-
                 const eventData = response.data.data[0];
 
                 setFormData({
@@ -215,7 +230,10 @@ const FormPage = ({ addEvent }) => {
                     porEmail: eventData.porEmail,
                     progress: eventData.progress,
                     institutions: eventData.institutions || [], // In case institutions is null
+                    checkpoint: eventData.checkpoint
                 });
+
+                setCheckpoints(eventData.checkpoint)
             } catch (error) {
                 console.error("Error fetching event data:", error);
 
@@ -285,7 +303,12 @@ const FormPage = ({ addEvent }) => {
                     </FormItem>
 
                     <FormItem label="Start Time">
-                        <TimePicker style={{margin:"5px"}} name="startTime" value={formData.startTime} onChange={handleInputChange} placeholder="Select start time" />
+                        <TimePicker style={{margin:"5px"}} name="startTime" value={formData.startTime} onChange={(event) => {
+                          setFormData((prevFormData) => ({
+                              ...prevFormData,
+                              startTime: event.target.value
+                          }));
+                        }} placeholder="Select start time" />
 
                         {formErrors.startTime && <div className="form-error">{formErrors.startTime}</div>}
                     </FormItem>
@@ -297,7 +320,12 @@ const FormPage = ({ addEvent }) => {
                     </FormItem>
 
                     <FormItem label="End Time">
-                        <TimePicker style={{margin:"5px"}} name="endTime" value={formData.endTime} onChange={handleInputChange} placeholder="Select end time" />
+                        <TimePicker style={{margin:"5px"}} name="endTime" value={formData.endTime} onChange={(event) => {
+                          setFormData((prevFormData) => ({
+                              ...prevFormData,
+                              endTime: event.target.value
+                          }));
+                        }} placeholder="Select end time" />
 
                         {formErrors.endTime && <div className="form-error">{formErrors.endTime}</div>}
                     </FormItem>
@@ -316,6 +344,36 @@ const FormPage = ({ addEvent }) => {
 
                         {formErrors.eventType && <div className="form-error">{formErrors.status}</div>}
                     </FormItem>
+                </FormGroup>
+
+                <FormGroup titleText="Event Checkpoints">
+                  <div>
+                    {checkpoints.map((checkpoint, index) => (
+                      <FormItem key={index}>
+                        <Input
+                          type="text"
+                          value={checkpoint.title}
+                          onChange={(e) => handleCheckpointChange(index, 'title', e.target.value)}
+                          placeholder="Checkpoint Title"
+                        />
+                        <FormItem label="Event Status">
+                          <Select style={{margin:"5px"}} name="status" value={formData.status} onChange={(e) => handleCheckpointChange(index, 'status', e.detail.selectedOption.value)}>
+                              <Option value="Success">On-time</Option>
+                              <Option value="Warning">Delayed</Option>
+                              <Option value="Error">Cancelled</Option>
+                              <Option value="Information">Completed</Option>
+                          </Select>
+                        </FormItem>
+                        <FormItem label="End Date">
+                          <DatePicker style={{margin:"5px"}} name="endDate" value={formData.endDate} onChange={(e) => handleCheckpointChange(index, 'date', e.target.value)} placeholder="Select end date" />
+                        </FormItem>
+                        <Button onClick={() => handleRemoveCheckpoint(index)}>Remove</Button>
+                      </FormItem>
+                    ))}
+                  </div>
+                  <Button style={{ width: "200px", margin: "30px" }} design="Emphasized" onClick={handleAddCheckpoint}>
+                    Add Checkpoint
+                  </Button>
                 </FormGroup>
 
                 <FormGroup titleText="Point Of Responsibility Data">
@@ -338,8 +396,6 @@ const FormPage = ({ addEvent }) => {
                             selectedItems={formData.institutions.map((item) => ({
                                 text: item,
                             }))}
-                            //onChange={handleMultiComboBoxChange}
-                            //onInput={handleMultiComboBoxChange}
                             onSelectionChange={handleMultiComboBoxChange}
                             placeholder="Select the Universities you want"
                         >

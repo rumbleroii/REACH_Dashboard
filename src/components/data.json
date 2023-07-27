@@ -1,38 +1,65 @@
 [
   {
-    "eventName": "dsfgdsgd",
+    "eventName": "dfsdf",
     "online": false,
-    "link": "",
-    "venue": "dsfgfdsg",
-    "eventType": "Experience",
-    "startDate": "Jul 18, 2023",
-    "startTime": "",
-    "endDate": "Jul 25, 2023",
-    "endTime": "",
-    "eventDescription": "sfdgdg",
+    "link": "sdfsd",
+    "venue": "sdfsd",
+    "eventType": "Research",
+    "startDate": "Jul 5, 2023",
+    "startTime": "3:56:32 PM",
+    "endDate": "Jul 5, 2023",
+    "endTime": "3:56:30 PM",
+    "eventDescription": "sdfsdf",
     "status": "Error",
     "progress": 0,
-    "porName": "sdfgfds",
-    "porEmail": "sdfgdfsg",
-    "institutions": [],
-    "id": "bi4rj9d7r0lkjizz6t"
+    "porName": "sdfsd",
+    "porEmail": "sdfdsf",
+    "institutions": [
+      "Cummins"
+    ],
+    "checkpoint": [
+      {
+        "title": "sdfsdf",
+        "status": "Warning",
+        "date": "Jul 19, 2023"
+      }
+    ],
+    "id": "bi4rj9d1hslkl0fhn6"
   },
   {
-    "eventName": "sdsd",
+    "eventName": "dsfsadfdsaf",
     "online": false,
-    "link": "",
-    "venue": "sdsds",
+    "link": "adsfdsaf",
+    "venue": "dsafsadf",
     "eventType": "Experience",
-    "startDate": "Jun 27, 2023",
-    "startTime": "",
-    "endDate": "Jul 19, 2023",
-    "endTime": "",
-    "eventDescription": "sdsd",
+    "startDate": "Jul 12, 2023",
+    "startTime": "2:01:14 PM",
+    "endDate": "Jul 26, 2023",
+    "endTime": "4:01:18 PM",
+    "eventDescription": "sdfdsaf",
     "status": "Error",
     "progress": 0,
-    "porName": "sdsd",
-    "porEmail": "sdsd",
-    "institutions": [],
-    "id": "bi4rj9d1hslkkwx3yj"
+    "porName": "asdfsadf",
+    "porEmail": "adsfsadf",
+    "institutions": [
+      "VJTI",
+      "Cummins",
+      "Amritha",
+      "XXX",
+      "YYY"
+    ],
+    "checkpoint": [
+      {
+        "title": "asdfdsaf",
+        "status": "Warning",
+        "date": "Jul 27, 2023"
+      },
+      {
+        "title": "asdfdsf",
+        "status": "Error",
+        "date": ""
+      }
+    ],
+    "id": "bi4rj9d1hslkl0lu9p"
   }
 ]
