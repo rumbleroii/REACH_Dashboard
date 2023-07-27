@@ -7,6 +7,9 @@ import { Timeline, TimelineItem } from "@ui5/webcomponents-react";
 import { Icon } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/calendar";
 
+import "@ui5/webcomponents-icons/dist/in-progress";
+
+
 import {
   ProgressIndicator,
   Button,
