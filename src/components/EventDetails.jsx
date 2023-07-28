@@ -98,6 +98,7 @@ const EventDetails = () => {
           onBeforeOpen={function ka() {}}
           onClose={function ka() {
             setEvent("Event Not Found");
+            navigate('/');
           }}
           open
           type="Submit"

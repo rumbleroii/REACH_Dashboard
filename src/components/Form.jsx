@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import { useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, useNavigate } from "react-router-dom";
 
 import axios from "axios";
 
@@ -30,6 +30,7 @@ import "@ui5/webcomponents/dist/features/InputElementsFormSupport.js";
 import "./Form.css";
 
 const FormPage = ({ addEvent }) => {
+  const navigate = useNavigate();
   const { eventId } = useParams();
   const location = useLocation();
   const [open, setOpen] = useState(false);
@@ -697,6 +698,7 @@ const FormPage = ({ addEvent }) => {
             onBeforeOpen={function ka() {}}
             onClose={function ka() {
               setOpen(false);
+              navigate('/');
             }}
             open
             type="Submit"
